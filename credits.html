@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credits</title>
+    <style>
+        body {
+            background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+            background-color: black;
+            color: lime;
+            font-family: "Courier New", cursive;
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+            border: 3px solid yellow;
+            background-color: #060647;
+            width: 800px;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid cyan;
+        }
+
+        a {
+            color: cyan;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: yellow;
+            text-decoration: underline;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .rainbow-animated {
+        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, red);
+        background-size: 200% auto; 
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: rainbow-flow 3s linear infinite;
+        }
+
+        @keyframes rainbow-flow {
+        0% { background-position: 0% center; }
+        100% { background-position: 200% center; }
+        }
+
+        </style>
+</head>
+
+<body>
+
+    <marquee behavior="scroll" direction="left" scrollamount="5">
+      * UNDER CONSTRUCTION *
+    </marquee>
+
+    <h1 class="blink">Page 2</h1>
+
+    <table>
+        <tr>
+            <td colspan="2">
+                <h2>A website</h2>
+                <a href="index.html">
+                   <img src="Home.png" alt="back"width=30 height= 30
+                    style=;float:left;>
+                </a>
+                
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>                            
+                <h1 class="rainbow-animated">** Credits **</h1>
+
+                <br>
+               
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <h3>Background images from Transparent Textures</h3>
+
+                <p>
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOG9uaDdqM2k0anhvaXUzcWoxZ3l4ZmFzd2ZqZWowNDU3aGE0eGp6OCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/SKGo6OYe24EBG/giphy.gif"height="200" width="200">
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <marquee behavior="scroll"> Thanks for visiting</marquee>
+
+</body>
+</html>
