@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <style>
+        body {
+            background-image: url("https://www.transparenttextures.com/patterns/stars.png");
+            background-color: black;
+            color: lime;
+            font-family: "Courier New", cursive;
+            text-align: center;
+        }
+
+        table {
+            margin: auto;
+            border: 3px solid yellow;
+            background-color: #000033;
+            width: 800px;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid cyan;
+        }
+
+        a {
+            color: cyan;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: yellow;
+            text-decoration: underline;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .counter {
+            background: black;
+            color: red;
+            font-family: monospace;
+            padding: 5px;
+            border: 2px inset gray;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <marquee behavior="scroll" direction="left" scrollamount="5">
+      * UNDER CONSTRUCTION *
+    </marquee>
+
+    <h1 class="blink">The Hub</h1>
+
+    <table>
+        <tr>
+            <td colspan="2">
+                <h2>A website to upload creative content</h2>
+            </td>
+        </tr>
+
+        <tr>
+            <td width="200">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="https://www.youtube.com/channel/UC7_ciyjLpVArrzP6wj1X-rQ">Youtube Channel</a></li>
+                    <li><a href="forum.html">Forum</a></li>
+                    <li><a href="#">Guestbook</a></li>
+                    <li><a href="#">Links</a></li>
+                </ul>
+            </td>
+
+            <td>                            
+                <p class="blink">** Watch This While I Make The Website **</p>
+
+                <br>
+                <video>
+                    
+                    <source src="Life.mov" type="video/quicktime">
+                
+                </video>
+               
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <h3>Go Back</h3>
+
+                <p>
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDhwZnBiMGEyYTVkYWNjbTgyaGp3amFtYmVvdzFuZzdvY2xqb2V5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/hFfi5paUIbE0Ejh8hF/giphy.gif"height="200" width="200">
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <marquee behavior="alternate"> Thanks for visiting</marquee>
+
+</body>
+</html>
