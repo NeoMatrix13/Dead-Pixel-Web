@@ -1,106 +1,356 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Credits</title>
+    <title>Credits - The Hub</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tahoma&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
+            background-color: #000010;
             background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
-            background-color: black;
-            color: lime;
-            font-family: "Courier New", cursive;
+            color: #00FF00;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+            font-size: 13px;
             text-align: center;
         }
 
-        table {
-            margin: auto;
-            border: 3px solid yellow;
-            background-color: #060647;
-            width: 800px;
+        .marquee-bar {
+            background: linear-gradient(90deg, #000033, #001166, #000033);
+            border-top: 2px solid #0055FF;
+            border-bottom: 2px solid #0055FF;
+            padding: 4px 0;
+            color: #FFFF00;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 2px;
         }
 
-        td {
-            padding: 10px;
-            border: 1px solid cyan;
+        .site-header {
+            background: linear-gradient(180deg, #000066 0%, #000033 40%, #000011 100%);
+            border-bottom: 3px solid #FFCC00;
+            padding: 12px 0 8px;
         }
 
-        a {
-            color: cyan;
+        .site-title {
+            font-size: 36px;
+            font-weight: bold;
+            font-family: "Comic Sans MS", "Trebuchet MS", cursive;
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFFF00 40%, #FF9900 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 3px;
+        }
+
+        .page-label {
+            color: #00CCFF;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav-bar {
+            background: linear-gradient(180deg, #0000AA, #000066);
+            border-bottom: 2px solid #00CCFF;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-bar a {
+            display: inline-block;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 16px;
+            border-right: 1px solid #0055AA;
+            border-left: 1px solid #0055AA;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-bar a:hover, .nav-bar a.active {
+            background: linear-gradient(180deg, #0066FF, #0033AA);
+            color: #FFFF00;
+        }
+
+        .breadcrumb {
+            background: #000022;
+            border-bottom: 1px solid #003366;
+            padding: 4px 12px;
+            color: #555555;
+            font-size: 11px;
+            text-align: left;
+        }
+        .breadcrumb a { color: #0066CC; text-decoration: none; }
+
+        .wrapper {
+            max-width: 820px;
+            margin: 12px auto;
+            padding: 0 8px;
+            text-align: left;
+        }
+
+        .content-box {
+            background: linear-gradient(180deg, #000044 0%, #000022 100%);
+            border: 2px solid #0066FF;
+            margin-bottom: 10px;
+        }
+
+        .content-box .box-title {
+            background: linear-gradient(90deg, #0000CC, #003399, #660000, #990000, #660000, #003399, #0000CC);
+            color: #FFFF00;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 5px 10px;
+            border-bottom: 1px solid #FF6600;
+            text-align: center;
+        }
+
+        .content-box .box-inner { padding: 14px; }
+
+        .credits-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .credits-table th {
+            background: linear-gradient(90deg, #000066, #0000AA, #000066);
+            color: #FFFF00;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 10px;
+            border: 1px solid #003399;
+            text-align: left;
+        }
+
+        .credits-table td {
+            padding: 7px 10px;
+            border: 1px solid #003366;
+            color: #CCCCCC;
+            font-size: 12px;
+            vertical-align: top;
+        }
+
+        .credits-table tr:nth-child(even) td {
+            background: #000033;
+        }
+
+        .credits-table tr:hover td {
+            background: #000055;
+        }
+
+        .credits-table a {
+            color: #00CCFF;
             text-decoration: none;
         }
+        .credits-table a:hover { color: #FFFF00; text-decoration: underline; }
 
-        a:hover {
-            color: yellow;
-            text-decoration: underline;
+        .credits-category {
+            color: #FF9900;
+            font-weight: bold;
         }
 
-        .blink {
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        .rainbow-animated {
-        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, red);
-        background-size: 200% auto; 
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        animation: rainbow-flow 3s linear infinite;
+        .rainbow-text {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, violet, red);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbow-flow 3s linear infinite;
+            font-weight: bold;
+            font-size: 22px;
+            display: block;
+            text-align: center;
+            padding: 8px 0;
         }
 
         @keyframes rainbow-flow {
-        0% { background-position: 0% center; }
-        100% { background-position: 200% center; }
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
-        </style>
-</head>
+        @keyframes blink-anim {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
+        .shoutout-box {
+            background: #000033;
+            border: 1px solid #003366;
+            border-left: 3px solid #FFFF00;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+        }
+
+        .shoutout-box .name {
+            color: #FFCC00;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .shoutout-box .reason {
+            color: #AAAAAA;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        hr.divider {
+            border: none;
+            border-top: 1px solid #003366;
+            margin: 10px 0;
+        }
+
+        .bottom-marquee {
+            background: linear-gradient(90deg, #110000, #001100, #000011, #110000);
+            border-top: 2px solid #333333;
+            padding: 5px 0;
+            color: #FFFF00;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .site-footer {
+            background: #000011;
+            border-top: 1px solid #333333;
+            padding: 8px;
+            color: #555555;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .site-footer a { color: #0055AA; }
+    </style>
+</head>
 <body>
 
-    <marquee behavior="scroll" direction="left" scrollamount="5">
-      * UNDER CONSTRUCTION *
+<div class="marquee-bar">
+    <marquee behavior="scroll" direction="left" scrollamount="4">
+        ★ CREDITS PAGE ★ &nbsp;&nbsp; THANKS TO EVERYONE WHO HELPED!! &nbsp;&nbsp; ★ THE HUB ★
     </marquee>
+</div>
 
-    <h1 class="blink">Page 2</h1>
+<div class="site-header">
+    <div class="site-title">✦ THE HUB ✦</div>
+    <div class="page-label">:: Credits & Thanks ::</div>
+</div>
 
-    <table>
-        <tr>
-            <td colspan="2">
-                <h2>A website</h2>
-                <a href="index.html">
-                   <img src="Home.png" alt="back"width=30 height= 30
-                    style=;float:left;>
-                </a>
-                
-            </td>
-        </tr>
+<div class="nav-bar">
+    <a href="index.html">🏠 Home</a>
+    <a href="page2.html">📁 Page 2</a>
+    <a href="forum.html">💬 Forum</a>
+    <a href="credits.html" class="active">⭐ Credits</a>
+    <a href="#">📖 Guestbook</a>
+    <a href="#">🔗 Links</a>
+</div>
 
-        <tr>
+<div class="breadcrumb">
+    <a href="index.html">Home</a> &gt; Credits
+</div>
 
-            <td>                            
-                <h1 class="rainbow-animated">** Credits **</h1>
+<div class="wrapper">
 
-                <br>
-               
-            </td>
-        </tr>
+    <div class="content-box">
+        <div class="box-title">⭐ CREDITS & ACKNOWLEDGEMENTS ⭐</div>
+        <div class="box-inner">
+            <span class="rainbow-text">✦ BIG THANKS TO EVERYONE!! ✦</span>
+            <hr class="divider">
+            <p style="color:#CCCCCC; line-height:1.8; margin-bottom:12px;">
+                This site wouldn't exist without the help of these awesome people and resources!! 
+                If I forgot you let me know in the <a href="#" style="color:#FFFF00;">guestbook</a>!!
+            </p>
 
-        <tr>
-            <td colspan="2">
-                <h3>Background images from Transparent Textures</h3>
+            <table class="credits-table">
+                <tr>
+                    <th>Resource</th>
+                    <th>What It's For</th>
+                    <th>Link</th>
+                </tr>
+                <tr>
+                    <td><span class="credits-category">Transparent Textures</span></td>
+                    <td>Background patterns used on all pages</td>
+                    <td><a href="https://www.transparenttextures.com" target="_blank">transparenttextures.com ↗</a></td>
+                </tr>
+                <tr>
+                    <td><span class="credits-category">GIPHY</span></td>
+                    <td>Animated GIFs used throughout the site</td>
+                    <td><a href="https://giphy.com" target="_blank">giphy.com ↗</a></td>
+                </tr>
+                <tr>
+                    <td><span class="credits-category">Google Fonts</span></td>
+                    <td>Web fonts (Tahoma fallback)</td>
+                    <td><a href="https://fonts.google.com" target="_blank">fonts.google.com ↗</a></td>
+                </tr>
+                <tr>
+                    <td><span class="credits-category">W3Schools</span></td>
+                    <td>HTML/CSS tutorials & reference</td>
+                    <td><a href="https://www.w3schools.com" target="_blank">w3schools.com ↗</a></td>
+                </tr>
+                <tr>
+                    <td><span class="credits-category">The Wayback Machine</span></td>
+                    <td>Inspiration from old websites</td>
+                    <td><a href="https://web.archive.org" target="_blank">web.archive.org ↗</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-                <p>
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOG9uaDdqM2k0anhvaXUzcWoxZ3l4ZmFzd2ZqZWowNDU3aGE0eGp6OCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/SKGo6OYe24EBG/giphy.gif"height="200" width="200">
-                </p>
-            </td>
-        </tr>
-    </table>
+    <div class="content-box">
+        <div class="box-title">💛 SPECIAL SHOUTOUTS</div>
+        <div class="box-inner">
+            <div class="shoutout-box">
+                <span class="name">★ my best friend</span>
+                <div class="reason">for always being supportive and helping me figure out CSS lol</div>
+            </div>
+            <div class="shoutout-box">
+                <span class="name">★ everyone who signed the guestbook</span>
+                <div class="reason">you guys are the reason i keep updating this site!! :)</div>
+            </div>
+            <div class="shoutout-box">
+                <span class="name">★ the forum regulars</span>
+                <div class="reason">thanks for keeping the community alive!! you know who you are</div>
+            </div>
+        </div>
+    </div>
 
-    <marquee behavior="scroll"> Thanks for visiting</marquee>
+    <div class="content-box">
+        <div class="box-title">📸 MEDIA CREDITS</div>
+        <div class="box-inner">
+            <p style="color:#CCCCCC; line-height:1.8; font-size:12px;">
+                All GIFs used on this site are sourced from 
+                <a href="https://giphy.com" target="_blank" style="color:#00CCFF;">GIPHY</a> 
+                and are the property of their respective creators.<br><br>
+                Background textures provided by 
+                <a href="https://www.transparenttextures.com" target="_blank" style="color:#00CCFF;">Transparent Textures</a>.<br><br>
+                All original content on this site is 
+                <span style="color:#FFFF00;">© The Hub 2005–2025</span>. 
+                Please don't steal my stuff!! If you want to use something just ask :)
+            </p>
+            <hr class="divider">
+            <div style="text-align:center;">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOG9uaDdqM2k0anhvaXUzcWoxZ3l4ZmFzd2ZqZWowNDU3aGE0eGp6OCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/SKGo6OYe24EBG/giphy.gif" height="120" width="120" alt="thanks gif" style="border:2px solid #FFFF00;">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="bottom-marquee">
+    <marquee behavior="scroll" scrollamount="3">
+        ✦ Thanks for visiting The Hub ✦ &nbsp;&nbsp; Don't forget to sign the guestbook! &nbsp;&nbsp; ✦ Best viewed in 1024x768 ✦
+    </marquee>
+</div>
+
+<div class="site-footer">
+    © 2005–2025 The Hub &nbsp;|&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="credits.html">Credits</a>
+</div>
 
 </body>
 </html>
