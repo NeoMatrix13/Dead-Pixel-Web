@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Credits - DeadPixelWeb</title>
+    <title>Forum - The Hub</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tahoma&display=swap');
 
@@ -55,7 +55,6 @@
         .nav-bar {
             background: linear-gradient(180deg, #0000AA, #000066);
             border-bottom: 2px solid #00CCFF;
-            padding: 0;
             display: flex;
             justify-content: center;
         }
@@ -87,13 +86,51 @@
             text-align: left;
         }
         .breadcrumb a { color: #0066CC; text-decoration: none; }
+        .breadcrumb a:hover { color: #00AAFF; }
 
         .wrapper {
-            max-width: 820px;
+            max-width: 860px;
             margin: 12px auto;
+            display: flex;
+            gap: 10px;
             padding: 0 8px;
             text-align: left;
         }
+
+        .sidebar { width: 175px; flex-shrink: 0; }
+
+        .sidebar-box {
+            background: linear-gradient(180deg, #000066 0%, #000033 100%);
+            border: 2px solid #0066FF;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-box .box-title {
+            background: linear-gradient(90deg, #0000CC, #0055FF, #0000CC);
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+            border-bottom: 1px solid #00AAFF;
+            text-align: center;
+        }
+
+        .sidebar-box ul { list-style: none; padding: 6px 0; }
+        .sidebar-box ul li { border-bottom: 1px dotted #003366; }
+        .sidebar-box ul li a {
+            display: block;
+            color: #00CCFF;
+            text-decoration: none;
+            padding: 4px 10px;
+            font-size: 12px;
+        }
+        .sidebar-box ul li a:before { content: "» "; color: #FFFF00; }
+        .sidebar-box ul li a:hover { background: #001144; color: #FFFF00; }
+        .sidebar-box .box-inner { padding: 8px; }
+
+        .main-content { flex: 1; min-width: 0; }
 
         .content-box {
             background: linear-gradient(180deg, #000044 0%, #000022 100%);
@@ -113,119 +150,216 @@
             text-align: center;
         }
 
-        .content-box .box-inner { padding: 14px; }
+        .content-box .box-inner { padding: 12px; }
 
-        .credits-table {
-            width: 100%;
-            border-collapse: collapse;
+        /* TABLE */
+        .forum-table { width: 100%; border-collapse: collapse; }
+        .forum-table .th {
+            background: linear-gradient(90deg, #001166, #0033AA, #001166);
+            color: #FFF;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 10px;
+            border: 1px solid #0055AA;
+            text-align: left;
+        }
+        .forum-table tr.clickable { cursor: pointer; }
+        .forum-table tr.clickable:hover td { background: #000055 !important; }
+        .forum-table tr:nth-child(even) td { background: #000033; }
+        .forum-table td { padding: 7px 10px; border: 1px solid #003366; vertical-align: middle; }
+
+        .cat-icon { width: 36px; text-align: center; font-size: 20px; }
+        .cat-name { color: #00CCFF; font-weight: bold; font-size: 13px; }
+        .cat-desc { color: #777; font-size: 11px; margin-top: 2px; }
+        .stat-cell { text-align: center; font-size: 11px; color: #666; width: 75px; }
+        .stat-num { color: #FFCC00; font-weight: bold; font-size: 14px; display: block; }
+        .lastpost-cell { font-size: 10px; color: #555; width: 160px; }
+        .lp-title { color: #00AAFF; cursor: pointer; }
+        .lp-title:hover { color: #FFFF00; }
+
+        /* POSTS */
+        .post-entry { display: flex; border-bottom: 1px solid #003366; }
+        .post-entry:last-child { border-bottom: none; }
+
+        .post-userinfo {
+            width: 130px; flex-shrink: 0;
+            background: #000033;
+            border-right: 1px solid #003366;
+            padding: 10px 8px;
+            text-align: center;
         }
 
-        .credits-table th {
-            background: linear-gradient(90deg, #000066, #0000AA, #000066);
-            color: #FFFF00;
+        .post-avatar {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, #000066, #001133);
+            border: 2px solid #003399;
+            margin: 0 auto 5px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+        }
+
+        .post-username { color: #FFCC00; font-weight: bold; font-size: 12px; word-break: break-all; }
+        .post-rank { color: #888; font-size: 10px; margin-top: 2px; }
+        .post-main { flex: 1; padding: 8px 12px; }
+
+        .post-header-bar {
+            background: #000033;
+            border-bottom: 1px solid #003366;
+            padding: 3px 8px;
+            display: flex;
+            justify-content: space-between;
+            margin: -8px -12px 10px;
+        }
+
+        .post-num { color: #555; font-size: 10px; }
+        .post-time { color: #555; font-size: 10px; }
+        .post-body-text { color: #CCC; line-height: 1.7; font-size: 12px; white-space: pre-wrap; word-break: break-word; }
+
+        /* FORMS */
+        .form-box {
+            background: linear-gradient(180deg, #000044, #000022);
+            border: 2px solid #0066FF;
+            margin-bottom: 10px;
+        }
+        .form-box .form-title {
+            background: linear-gradient(90deg, #000066, #0033AA, #000066);
+            color: #FFF;
+            font-weight: bold;
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 6px 10px;
-            border: 1px solid #003399;
-            text-align: left;
+            padding: 5px 10px;
+            border-bottom: 1px solid #0055AA;
         }
+        .form-inner { padding: 12px; }
 
-        .credits-table td {
-            padding: 7px 10px;
+        .form-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .form-label { color: #AAA; font-size: 12px; font-weight: bold; width: 90px; flex-shrink: 0; text-align: right; }
+
+        .form-input {
+            background: #000022;
             border: 1px solid #003366;
-            color: #CCCCCC;
+            border-bottom: 2px solid #0055AA;
+            color: #00FF00;
+            font-family: Tahoma, Verdana, sans-serif;
             font-size: 12px;
-            vertical-align: top;
+            padding: 4px 6px;
+            outline: none;
         }
+        .form-input:focus { border-color: #0066FF; background: #000033; }
 
-        .credits-table tr:nth-child(even) td {
-            background: #000033;
-        }
-
-        .credits-table tr:hover td {
-            background: #000055;
-        }
-
-        .credits-table a {
-            color: #00CCFF;
-            text-decoration: none;
-        }
-        .credits-table a:hover { color: #FFFF00; text-decoration: underline; }
-
-        .credits-category {
-            color: #FF9900;
-            font-weight: bold;
-        }
-
-        .rainbow-text {
-            background: linear-gradient(90deg, red, orange, yellow, green, blue, violet, red);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: rainbow-flow 3s linear infinite;
-            font-weight: bold;
-            font-size: 22px;
-            display: block;
-            text-align: center;
-            padding: 8px 0;
-        }
-
-        @keyframes rainbow-flow {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
-
-        @keyframes blink-anim {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .shoutout-box {
-            background: #000033;
+        .form-textarea {
+            background: #000022;
             border: 1px solid #003366;
-            border-left: 3px solid #FFFF00;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-        }
-
-        .shoutout-box .name {
-            color: #FFCC00;
-            font-weight: bold;
+            border-bottom: 2px solid #0055AA;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
             font-size: 12px;
+            padding: 6px;
+            outline: none;
+            width: 100%;
+            resize: vertical;
+            min-height: 90px;
+        }
+        .form-textarea:focus { border-color: #0066FF; background: #000033; }
+
+        .btn-primary {
+            background: linear-gradient(180deg, #004400, #002200);
+            border: 2px solid #00AA00;
+            color: #00FF00;
+            font-family: Tahoma, Verdana, sans-serif;
+            font-size: 12px; font-weight: bold;
+            padding: 6px 16px; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-primary:hover { background: linear-gradient(180deg,#006600,#003300); color: #FFFF00; }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-back {
+            background: linear-gradient(180deg, #000066, #000033);
+            border: 2px solid #0066FF; color: #00CCFF;
+            font-family: Tahoma, Verdana, sans-serif;
+            font-size: 12px; font-weight: bold;
+            padding: 5px 12px; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-right: 8px;
+        }
+        .btn-back:hover { border-color: #00CCFF; color: #FFFF00; }
+
+        .btn-new {
+            background: linear-gradient(180deg, #005500, #003300);
+            border: 2px solid #00AA00; color: #00FF00;
+            font-family: Tahoma, Verdana, sans-serif;
+            font-size: 12px; font-weight: bold;
+            padding: 6px 14px; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-new:hover { background: linear-gradient(180deg,#007700,#004400); color: #FFFF00; }
+
+        /* STATUS */
+        .loading-bar {
+            background: #000033; border: 1px solid #003366;
+            padding: 24px; text-align: center; color: #0066FF; font-size: 13px;
         }
 
-        .shoutout-box .reason {
-            color: #AAAAAA;
-            font-size: 11px;
-            margin-top: 3px;
+        @keyframes dotdotdot {
+            0%  { content: '.'; }
+            33% { content: '..'; }
+            66% { content: '...'; }
+            100%{ content: ''; }
+        }
+        .dots::after { content: ''; animation: dotdotdot 1.5s infinite; }
+
+        .error-msg {
+            background: #330000; border: 1px solid #AA0000;
+            color: #FF6666; padding: 12px 14px; font-size: 12px; margin: 8px 0;
         }
 
-        hr.divider {
-            border: none;
-            border-top: 1px solid #003366;
-            margin: 10px 0;
+        .success-msg {
+            background: #003300; border: 1px solid #00AA00;
+            color: #00FF88; padding: 6px 12px; font-size: 12px;
+            display: inline-block;
         }
+
+        .inline-error { color: #FF4444; font-size: 11px; margin-left: 8px; }
+
+        /* SETUP */
+        .setup-box {
+            background: #000033; border: 2px solid #FFCC00;
+            padding: 16px; margin: 10px 0;
+            font-size: 12px; line-height: 1.8; color: #CCC;
+        }
+        .setup-box h3 { color: #FFFF00; margin-bottom: 8px; font-size: 14px; }
+        .setup-box a { color: #00CCFF; }
+        .setup-input {
+            background: #000011; border: 1px solid #0055AA;
+            color: #00FF00; font-family: "Courier New", monospace;
+            font-size: 12px; padding: 5px 8px; width: 100%;
+            margin: 4px 0; outline: none;
+        }
+        .setup-input:focus { border-color: #00AAFF; }
+
+        hr.divider { border: none; border-top: 1px solid #003366; margin: 8px 0; }
+
+        .forum-stats-bar {
+            background: #000022; border-bottom: 1px solid #003366;
+            padding: 5px 10px; font-size: 11px; color: #555;
+            display: flex; justify-content: space-between;
+        }
+        .forum-stats-bar strong { color: #FFCC00; }
 
         .bottom-marquee {
-            background: linear-gradient(90deg, #110000, #001100, #000011, #110000);
-            border-top: 2px solid #333333;
-            padding: 5px 0;
-            color: #FFFF00;
-            font-size: 12px;
-            font-weight: bold;
+            background: linear-gradient(90deg,#110000,#001100,#000011);
+            border-top: 2px solid #333; padding: 5px 0;
+            color: #FFFF00; font-size: 12px; font-weight: bold;
         }
 
         .site-footer {
-            background: #000011;
-            border-top: 1px solid #333333;
-            padding: 8px;
-            color: #555555;
-            font-size: 10px;
-            text-align: center;
+            background: #000011; border-top: 1px solid #333;
+            padding: 8px; color: #555; font-size: 10px; text-align: center;
         }
-
         .site-footer a { color: #0055AA; }
     </style>
 </head>
@@ -233,115 +367,566 @@
 
 <div class="marquee-bar">
     <marquee behavior="scroll" direction="left" scrollamount="4">
-        ★ CREDITS PAGE ★ &nbsp;&nbsp; THANKS TO EVERYONE WHO HELPED!! &nbsp;&nbsp; ★ THE HUB ★
+        ★ THE HUB FORUM ★ &nbsp;&nbsp; POST YOUR THOUGHTS!! &nbsp;&nbsp; ★ BE NICE OR GET BANNED ★ &nbsp;&nbsp; HAVE FUN!! &nbsp;&nbsp; ★
     </marquee>
 </div>
 
 <div class="site-header">
     <div class="site-title">✦ THE HUB ✦</div>
-    <div class="page-label">:: Credits & Thanks ::</div>
+    <div class="page-label">:: Community Forum ::</div>
 </div>
 
 <div class="nav-bar">
     <a href="index.html">🏠 Home</a>
     <a href="page2.html">📁 Page 2</a>
-    <a href="forum.html">💬 Forum</a>
-    <a href="credits.html" class="active">⭐ Credits</a>
+    <a href="forum.html" class="active">💬 Forum</a>
+    <a href="credits.html">⭐ Credits</a>
     <a href="#">📖 Guestbook</a>
     <a href="#">🔗 Links</a>
 </div>
 
-<div class="breadcrumb">
-    <a href="index.html">Home</a> &gt; Credits
+<div class="breadcrumb" id="breadcrumb">
+    <a href="index.html">Home</a> &gt;
+    <a href="#" onclick="nav('index');return false;">Forum</a>
 </div>
 
 <div class="wrapper">
-
-    <div class="content-box">
-        <div class="box-title">⭐ CREDITS & ACKNOWLEDGEMENTS ⭐</div>
-        <div class="box-inner">
-            <span class="rainbow-text">✦ BIG THANKS TO EVERYONE!! ✦</span>
-            <hr class="divider">
-            <p style="color:#CCCCCC; line-height:1.8; margin-bottom:12px;">
-                                If I forgot you let me know in the <a href="#" style="color:#FFFF00;">guestbook</a>!!
-            </p>
-
-            <table class="credits-table">
-                <tr>
-                    <th>Resource</th>
-                    <th>What It's For</th>
-                    <th>Link</th>
-                </tr>
-                <tr>
-                    <td><span class="credits-category">Transparent Textures</span></td>
-                    <td>Background patterns used on all pages</td>
-                    <td><a href="https://www.transparenttextures.com" target="_blank">transparenttextures.com ↗</a></td>
-                </tr>
-                <tr>
-                    <td><span class="credits-category">GIPHY</span></td>
-                    <td>Animated GIFs used throughout the site</td>
-                    <td><a href="https://giphy.com" target="_blank">giphy.com ↗</a></td>
-                </tr>
-                <tr>
-                    <td><span class="credits-category">Google Fonts</span></td>
-                    <td>Web fonts (Tahoma fallback)</td>
-                    <td><a href="https://fonts.google.com" target="_blank">fonts.google.com ↗</a></td>
-                </tr>
-                <tr>
-                    <td><span class="credits-category">W3Schools</span></td>
-                    <td>HTML/CSS tutorials & reference</td>
-                    <td><a href="https://www.w3schools.com" target="_blank">w3schools.com ↗</a></td>
-                </tr>
-                <tr>
-                    <td><span class="credits-category">The Wayback Machine</span></td>
-                    <td>Inspiration from old websites</td>
-                    <td><a href="https://web.archive.org" target="_blank">web.archive.org ↗</a></td>
-                </tr>
-            </table>
+    <div class="sidebar">
+        <div class="sidebar-box">
+            <div class="box-title">📌 Navigation</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="page2.html">Page 2</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="credits.html">Credits</a></li>
+                <li><a href="#">Guestbook</a></li>
+            </ul>
         </div>
-    </div>
 
-    <div class="content-box">
-        <div class="box-title"> SPECIAL SHOUTOUTS</div>
-        <div class="box-inner">
-            <div class="shoutout-box">
-                <span class="name">★ None </span>
-                <div class="reason">____</div>
+        <div class="sidebar-box">
+            <div class="box-title">📜 Rules</div>
+            <div class="box-inner">
+                <p style="font-size:10px;color:#AAA;line-height:1.8;">
+                    1. Be nice!!<br>
+                    2. No spam<br>
+                    3. No flaming<br>
+                    4. Stay on topic<br>
+                    5. Have fun!! :)
+                </p>
+            </div>
+        </div>
+
+        <div class="sidebar-box">
+            <div class="box-title">⚙️ Backend</div>
+            <div class="box-inner">
+                <p style="font-size:10px;color:#AAA;line-height:1.6;">
+                    Posts stored on JSONBin.io<br><br>
+                    <a href="#" onclick="nav('setup');return false;" style="color:#FFCC00;font-weight:bold;">» Configure</a>
+                </p>
             </div>
         </div>
     </div>
 
-    <div class="content-box">
-        <div class="box-title">📸 MEDIA CREDITS</div>
-        <div class="box-inner">
-            <p style="color:#CCCCCC; line-height:1.8; font-size:12px;">
-                All GIFs used on this site are sourced from 
-                <a href="https://giphy.com" target="_blank" style="color:#00CCFF;">GIPHY</a> 
-                and are the property of their respective creators.<br><br>
-                Background textures provided by 
-                <a href="https://www.transparenttextures.com" target="_blank" style="color:#00CCFF;">Transparent Textures</a>.<br><br>
-                All original content on this site is 
-                <span style="color:#FFFF00;">© NeoMatrix13 - github.com/NeoMatrix13</span>. 
-                Please don't steal my stuff!! If you want to use something just ask :)
-            </p>
-            <hr class="divider">
-            <div style="text-align:center;">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOG9uaDdqM2k0anhvaXUzcWoxZ3l4ZmFzd2ZqZWowNDU3aGE0eGp6OCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/SKGo6OYe24EBG/giphy.gif" height="120" width="120" alt="thanks gif" style="border:2px solid #FFFF00;">
-            </div>
-        </div>
+    <div class="main-content" id="main-content">
+        <div class="loading-bar">Loading<span class="dots"></span></div>
     </div>
-
 </div>
 
 <div class="bottom-marquee">
     <marquee behavior="scroll" scrollamount="3">
-        ✦ Thanks for visiting  ✦ 
+        ✦ The Hub Forum ✦ &nbsp;&nbsp; Keep it clean, keep it fun!! &nbsp;&nbsp; ✦ Best viewed in 1024x768 ✦
     </marquee>
 </div>
 
 <div class="site-footer">
-    NeoMatrix13 &nbsp;|&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="credits.html">Credits</a>
+    © 2005–2025 The Hub Forum &nbsp;|&nbsp;
+    <a href="index.html">Home</a> &nbsp;|&nbsp;
+    <a href="credits.html">Credits</a><br>
+    Forum data stored persistently via <a href="https://jsonbin.io" target="_blank">JSONBin.io</a>
 </div>
+
+<script>
+// ================================================================
+//  THE HUB FORUM — Real persistent backend via JSONBin.io
+//
+//  SETUP INSTRUCTIONS:
+//  1. Go to https://jsonbin.io — create a free account
+//  2. Dashboard → API Keys → Create a Master Key
+//  3. Click "Configure" in the sidebar, paste the key, hit Connect
+//  4. Done! The forum auto-creates its storage bin on first use.
+//     All posts are stored on JSONBin and shared across visitors.
+// ================================================================
+
+const LS_KEY    = 'hubforum_apikey';
+const LS_BIN    = 'hubforum_binid';
+const LS_USER   = 'hubforum_username';
+const JBIN      = 'https://api.jsonbin.io/v3';
+
+const CATEGORIES = [
+    { id:1, icon:'💬', name:'General Chat',    desc:'Talk about anything and introduce yourself!' },
+    { id:2, icon:'🎨', name:'Creative Corner', desc:'Share your art, writing, music, and creative work' },
+    { id:3, icon:'🎮', name:'Games & Tech',    desc:'Video games, computers, internet stuff' },
+    { id:4, icon:'🌐', name:'Web Design Help', desc:'Ask for help with HTML, CSS, your own site' },
+    { id:5, icon:'⭐', name:'Site Feedback',   desc:'Suggestions and feedback for The Hub' },
+];
+
+// ── localStorage helpers ──────────────────────────────────────
+const getKey  = ()  => localStorage.getItem(LS_KEY)  || '';
+const getBin  = ()  => localStorage.getItem(LS_BIN)  || '';
+const getUser = ()  => localStorage.getItem(LS_USER) || '';
+const setKey  = v   => localStorage.setItem(LS_KEY,  v);
+const setBin  = v   => localStorage.setItem(LS_BIN,  v);
+const setUser = v   => localStorage.setItem(LS_USER, v);
+
+// ── JSONBin API ───────────────────────────────────────────────
+async function apiRead() {
+    const res = await fetch(`${JBIN}/b/${getBin()}/latest`, {
+        headers: { 'X-Master-Key': getKey() }
+    });
+    if (res.status === 401) throw new Error('Invalid API key — go to Setup to fix it.');
+    if (res.status === 404) throw new Error('Storage bin not found. It may have been deleted. Go to Setup.');
+    if (!res.ok) throw new Error(`JSONBin read error (HTTP ${res.status})`);
+    return (await res.json()).record;
+}
+
+async function apiWrite(data) {
+    const res = await fetch(`${JBIN}/b/${getBin()}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'X-Master-Key': getKey() },
+        body: JSON.stringify(data)
+    });
+    if (res.status === 401) throw new Error('Invalid API key.');
+    if (!res.ok) throw new Error(`JSONBin write error (HTTP ${res.status})`);
+    return (await res.json()).record;
+}
+
+async function apiCreateBin(key) {
+    const res = await fetch(`${JBIN}/b`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': key,
+            'X-Bin-Name': 'hub-forum',
+            'X-Bin-Private': 'false',
+        },
+        body: JSON.stringify({ threads: [], nextThreadId: 1, nextPostId: 1 })
+    });
+    if (res.status === 401) throw new Error('Invalid API key — double-check it on jsonbin.io.');
+    if (!res.ok) throw new Error(`Could not create bin (HTTP ${res.status})`);
+    return (await res.json()).metadata.id;
+}
+
+// ── Navigation state ──────────────────────────────────────────
+let S = { view: 'index', catId: null, threadId: null };
+
+function nav(view, catId, threadId) {
+    S = { view, catId: catId ?? null, threadId: threadId ?? null };
+    render();
+}
+
+function crumb(html) {
+    document.getElementById('breadcrumb').innerHTML = html;
+}
+
+const mc = () => document.getElementById('main-content');
+
+// ── Render dispatch ───────────────────────────────────────────
+function render() {
+    if (!getKey() || !getBin()) { viewSetup(false); return; }
+    switch (S.view) {
+        case 'setup':      viewSetup(true); break;
+        case 'index':      viewIndex(); break;
+        case 'category':   viewCategory(S.catId); break;
+        case 'thread':     viewThread(S.threadId); break;
+        case 'new-thread': viewNewThread(S.catId); break;
+    }
+}
+
+// ── SETUP ─────────────────────────────────────────────────────
+function viewSetup(voluntary) {
+    crumb(`<a href="index.html">Home</a> &gt; <a href="#" onclick="nav('index');return false;">Forum</a> &gt; Setup`);
+    mc().innerHTML = `
+    <div class="content-box">
+        <div class="box-title">⚙️ FORUM SETUP — JSONBIN.IO</div>
+        <div class="box-inner">
+            <div class="setup-box">
+                <h3>Connect to a real backend (free, ~2 minutes)</h3>
+                <p>This forum uses <a href="https://jsonbin.io" target="_blank">JSONBin.io</a> to store
+                posts. Anyone who visits your site will see the same real posts.</p>
+                <hr class="divider">
+                <p><strong style="color:#FFFF00;">Step 1:</strong>
+                   Go to <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> and create a free account.</p>
+                <p><strong style="color:#FFFF00;">Step 2:</strong>
+                   Go to <strong>Dashboard → API Keys</strong> and create a Master Key.</p>
+                <p><strong style="color:#FFFF00;">Step 3:</strong>
+                   Paste it below and click Connect. Your forum storage will be created automatically.</p>
+                <hr class="divider">
+                <label style="color:#AAA;font-size:12px;display:block;margin-bottom:3px;">JSONBin Master Key:</label>
+                <input class="setup-input" id="s-key" type="password"
+                       placeholder="\$2b\$10\$..." value="${h(getKey())}">
+                <br><br>
+                <label style="color:#AAA;font-size:12px;display:block;margin-bottom:3px;">
+                    Existing Bin ID <span style="color:#555;">(leave blank to auto-create)</span>:
+                </label>
+                <input class="setup-input" id="s-bin" type="text"
+                       placeholder="6abc12..." value="${h(getBin())}">
+                <br><br>
+                <button class="btn-primary" id="s-btn" onclick="doSetup()">CONNECT »</button>
+                ${voluntary ? `&nbsp;<button class="btn-back" onclick="nav('index')">« Cancel</button>` : ''}
+                <div id="s-status" style="margin-top:10px;"></div>
+            </div>
+        </div>
+    </div>`;
+}
+
+async function doSetup() {
+    const key = document.getElementById('s-key').value.trim();
+    const existingBin = document.getElementById('s-bin').value.trim();
+    const statusEl = document.getElementById('s-status');
+    const btn = document.getElementById('s-btn');
+
+    if (!key) { statusEl.innerHTML = err('Please enter your API key.'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'CONNECTING...';
+    statusEl.innerHTML = '<span style="color:#0088FF;">Working<span class="dots"></span></span>';
+
+    try {
+        let binId = existingBin;
+        if (!binId) {
+            statusEl.innerHTML = '<span style="color:#0088FF;">Creating storage bin<span class="dots"></span></span>';
+            binId = await apiCreateBin(key);
+        }
+
+        setKey(key);
+        setBin(binId);
+
+        statusEl.innerHTML = '<span style="color:#0088FF;">Verifying connection<span class="dots"></span></span>';
+        await apiRead();
+
+        statusEl.innerHTML = `<span class="success-msg">✓ Connected! Bin ID: ${h(binId)}</span>`;
+        setTimeout(() => nav('index'), 1200);
+    } catch (e) {
+        btn.disabled = false;
+        btn.textContent = 'CONNECT »';
+        statusEl.innerHTML = err(e.message);
+    }
+}
+
+// ── INDEX ─────────────────────────────────────────────────────
+async function viewIndex() {
+    crumb(`<a href="index.html">Home</a> &gt; Forum`);
+    mc().innerHTML = loading('Loading forum');
+
+    let data;
+    try { data = await apiRead(); }
+    catch(e) { mc().innerHTML = errBox(e.message); return; }
+
+    const threads = data.threads || [];
+    const totalPosts = threads.reduce((s,t) => s + (t.posts||[]).length, 0);
+
+    let rows = '';
+    for (const cat of CATEGORIES) {
+        const cts = threads.filter(t => t.catId === cat.id);
+        const cps = cts.reduce((s,t) => s + (t.posts||[]).length, 0);
+        const last = [...cts].sort((a,b)=>b.id-a.id)[0];
+        const lp = last ? last.posts[last.posts.length-1] : null;
+
+        rows += `
+        <tr class="clickable" onclick="nav('category',${cat.id})">
+            <td class="cat-icon">${cat.icon}</td>
+            <td><span class="cat-name">${cat.name}</span><div class="cat-desc">${cat.desc}</div></td>
+            <td class="stat-cell"><span class="stat-num">${cts.length}</span>threads</td>
+            <td class="stat-cell"><span class="stat-num">${cps}</span>posts</td>
+            <td class="lastpost-cell">
+                ${lp
+                    ? `<div class="lp-title" onclick="event.stopPropagation();nav('thread',${last.catId},${last.id})">${h(last.title.substring(0,30))}${last.title.length>30?'…':''}</div>
+                       <div class="lp-by">by ${h(lp.author)}<br>${lp.date}</div>`
+                    : '<span style="color:#333">no posts yet</span>'}
+            </td>
+        </tr>`;
+    }
+
+    mc().innerHTML = `
+    <div class="content-box">
+        <div class="box-title">💬 THE HUB FORUM — MAIN INDEX</div>
+        <div class="box-inner" style="padding:0;">
+            <div class="forum-stats-bar">
+                <span>Posts: <strong>${totalPosts}</strong></span>
+                <span>Threads: <strong>${threads.length}</strong></span>
+            </div>
+            <table class="forum-table">
+                <tr>
+                    <td class="th" colspan="2">Category</td>
+                    <td class="th" style="width:75px;text-align:center;">Threads</td>
+                    <td class="th" style="width:75px;text-align:center;">Posts</td>
+                    <td class="th" style="width:160px;">Last Post</td>
+                </tr>
+                ${rows}
+            </table>
+        </div>
+    </div>`;
+}
+
+// ── CATEGORY ─────────────────────────────────────────────────
+async function viewCategory(catId) {
+    const cat = CATEGORIES.find(c=>c.id===catId);
+    crumb(`<a href="index.html">Home</a> &gt; <a href="#" onclick="nav('index');return false;">Forum</a> &gt; ${h(cat.name)}`);
+    mc().innerHTML = loading('Loading threads');
+
+    let data;
+    try { data = await apiRead(); }
+    catch(e) { mc().innerHTML = errBox(e.message); return; }
+
+    const catThreads = (data.threads||[])
+        .filter(t=>t.catId===catId)
+        .sort((a,b)=>b.id-a.id);
+
+    let rows = catThreads.length === 0
+        ? `<tr><td colspan="5" style="padding:20px;text-align:center;color:#555;border:1px solid #003366;">No threads yet — be the first to post!</td></tr>`
+        : catThreads.map(t => {
+            const lp = t.posts[t.posts.length-1];
+            return `
+            <tr class="clickable" onclick="nav('thread',${catId},${t.id})">
+                <td style="width:28px;text-align:center;">💬</td>
+                <td>
+                    <span style="color:#00CCFF;font-weight:bold;font-size:12px;">${h(t.title)}</span>
+                    <div style="color:#666;font-size:10px;margin-top:2px;">by ${h(t.author)} · ${t.date}</div>
+                </td>
+                <td class="stat-cell"><span class="stat-num">${t.posts.length-1}</span></td>
+                <td class="stat-cell"><span class="stat-num">${t.views||0}</span></td>
+                <td class="lastpost-cell">
+                    <div style="color:#00AAFF;">${h(lp.author)}</div>
+                    <div>${lp.date}</div>
+                </td>
+            </tr>`;
+        }).join('');
+
+    mc().innerHTML = `
+    <div class="content-box">
+        <div class="box-title">${cat.icon} ${h(cat.name).toUpperCase()}</div>
+        <div class="box-inner" style="padding-bottom:10px;">
+            <div style="margin-bottom:8px;">
+                <button class="btn-back" onclick="nav('index')">« Forum Index</button>
+                <button class="btn-new" onclick="nav('new-thread',${catId})">+ New Thread</button>
+            </div>
+            <table class="forum-table">
+                <tr>
+                    <td class="th" colspan="2">Thread</td>
+                    <td class="th" style="width:65px;text-align:center;">Replies</td>
+                    <td class="th" style="width:65px;text-align:center;">Views</td>
+                    <td class="th" style="width:150px;">Last Post</td>
+                </tr>
+                ${rows}
+            </table>
+        </div>
+    </div>`;
+}
+
+// ── THREAD ────────────────────────────────────────────────────
+async function viewThread(threadId) {
+    mc().innerHTML = loading('Loading thread');
+
+    let data;
+    try { data = await apiRead(); }
+    catch(e) { mc().innerHTML = errBox(e.message); return; }
+
+    const thread = (data.threads||[]).find(t=>t.id===threadId);
+    if (!thread) { mc().innerHTML = errBox('Thread not found.'); return; }
+
+    const cat = CATEGORIES.find(c=>c.id===thread.catId);
+    crumb(`<a href="index.html">Home</a> &gt; <a href="#" onclick="nav('index');return false;">Forum</a> &gt; <a href="#" onclick="nav('category',${cat.id});return false;">${h(cat.name)}</a> &gt; ${h(thread.title.substring(0,40))}`);
+
+    // Increment views silently
+    thread.views = (thread.views||0) + 1;
+    apiWrite(data).catch(()=>{});
+
+    const posts = (thread.posts||[]).map((p, i) => `
+    <div class="post-entry">
+        <div class="post-userinfo">
+            <div class="post-avatar">${userEmoji(p.author)}</div>
+            <div class="post-username">${h(p.author)}</div>
+            <div class="post-rank">${i===0?'OP':'Member'}</div>
+        </div>
+        <div class="post-main">
+            <div class="post-header-bar">
+                <span class="post-num">Post #${i+1}</span>
+                <span class="post-time">📅 ${p.date}</span>
+            </div>
+            <div class="post-body-text">${h(p.body)}</div>
+        </div>
+    </div>`).join('');
+
+    mc().innerHTML = `
+    <div class="content-box">
+        <div class="box-title">💬 ${h(thread.title)}</div>
+        <div class="box-inner" style="padding:8px;">
+            <button class="btn-back" onclick="nav('category',${thread.catId})">« ${h(cat.name)}</button>
+            <span style="color:#555;font-size:11px;margin-left:8px;">${thread.views} views · ${thread.posts.length} post${thread.posts.length!==1?'s':''}</span>
+        </div>
+        ${posts}
+    </div>
+    <div class="form-box">
+        <div class="form-title">✏️ POST A REPLY</div>
+        <div class="form-inner">
+            <div class="form-row">
+                <label class="form-label">Username:</label>
+                <input class="form-input" id="r-author" type="text"
+                       placeholder="your username" maxlength="30" style="max-width:200px;"
+                       value="${h(getUser())}">
+            </div>
+            <div style="margin-bottom:8px;">
+                <textarea class="form-textarea" id="r-body" placeholder="Write your reply..."></textarea>
+            </div>
+            <button class="btn-primary" id="r-btn" onclick="submitReply(${threadId})">POST REPLY »</button>
+            <span id="r-err" class="inline-error"></span>
+        </div>
+    </div>`;
+}
+
+// ── NEW THREAD ────────────────────────────────────────────────
+function viewNewThread(catId) {
+    const cat = CATEGORIES.find(c=>c.id===catId);
+    crumb(`<a href="index.html">Home</a> &gt; <a href="#" onclick="nav('index');return false;">Forum</a> &gt; <a href="#" onclick="nav('category',${catId});return false;">${h(cat.name)}</a> &gt; New Thread`);
+
+    mc().innerHTML = `
+    <div class="form-box" style="border-color:#FFCC00;">
+        <div class="form-title" style="background:linear-gradient(90deg,#442200,#885500,#442200);">
+            📝 NEW THREAD IN: ${h(cat.name.toUpperCase())}
+        </div>
+        <div class="form-inner">
+            <div style="margin-bottom:10px;">
+                <button class="btn-back" onclick="nav('category',${catId})">« Back to ${h(cat.name)}</button>
+            </div>
+            <div class="form-row">
+                <label class="form-label">Username:</label>
+                <input class="form-input" id="n-author" type="text"
+                       placeholder="your username" maxlength="30" style="max-width:200px;"
+                       value="${h(getUser())}">
+            </div>
+            <div class="form-row">
+                <label class="form-label">Title:</label>
+                <input class="form-input" id="n-title" type="text"
+                       placeholder="Thread title..." maxlength="120" style="flex:1;">
+            </div>
+            <div style="margin-bottom:8px;">
+                <textarea class="form-textarea" id="n-body"
+                          placeholder="Write your post..." style="min-height:120px;"></textarea>
+            </div>
+            <button class="btn-primary" id="n-btn" onclick="submitNewThread(${catId})">POST THREAD »</button>
+            <span id="n-err" class="inline-error"></span>
+        </div>
+    </div>`;
+}
+
+// ── SUBMIT REPLY ──────────────────────────────────────────────
+async function submitReply(threadId) {
+    const author = document.getElementById('r-author').value.trim();
+    const body   = document.getElementById('r-body').value.trim();
+    const errEl  = document.getElementById('r-err');
+    const btn    = document.getElementById('r-btn');
+
+    if (!author)          { errEl.textContent = 'Enter a username!'; return; }
+    if (author.length<2)  { errEl.textContent = 'Username too short!'; return; }
+    if (!body)            { errEl.textContent = 'Write something!'; return; }
+    if (body.length>5000) { errEl.textContent = 'Too long (max 5000 chars)!'; return; }
+
+    btn.disabled = true; btn.textContent = 'POSTING...'; errEl.textContent = '';
+    setUser(author);
+
+    try {
+        const data = await apiRead();
+        const thread = (data.threads||[]).find(t=>t.id===threadId);
+        if (!thread) throw new Error('Thread not found — try refreshing.');
+
+        thread.posts.push({ id: data.nextPostId++, author, body, date: ts() });
+        await apiWrite(data);
+        await viewThread(mc(), threadId);
+
+        setTimeout(() => {
+            const posts = document.querySelectorAll('.post-entry');
+            if (posts.length) posts[posts.length-1].scrollIntoView({ behavior:'smooth' });
+        }, 100);
+    } catch(e) {
+        btn.disabled = false; btn.textContent = 'POST REPLY »';
+        errEl.textContent = 'Error: ' + e.message;
+    }
+}
+
+// ── SUBMIT NEW THREAD ─────────────────────────────────────────
+async function submitNewThread(catId) {
+    const author = document.getElementById('n-author').value.trim();
+    const title  = document.getElementById('n-title').value.trim();
+    const body   = document.getElementById('n-body').value.trim();
+    const errEl  = document.getElementById('n-err');
+    const btn    = document.getElementById('n-btn');
+
+    if (!author)          { errEl.textContent = 'Enter a username!'; return; }
+    if (author.length<2)  { errEl.textContent = 'Username too short!'; return; }
+    if (!title)           { errEl.textContent = 'Enter a thread title!'; return; }
+    if (!body)            { errEl.textContent = 'Write something!'; return; }
+    if (body.length>5000) { errEl.textContent = 'Too long (max 5000 chars)!'; return; }
+
+    btn.disabled = true; btn.textContent = 'POSTING...'; errEl.textContent = '';
+    setUser(author);
+
+    try {
+        const data = await apiRead();
+        const newThread = {
+            id: data.nextThreadId++,
+            catId, title, author, date: ts(), views: 0,
+            posts: [{ id: data.nextPostId++, author, body, date: ts() }]
+        };
+        data.threads = data.threads || [];
+        data.threads.push(newThread);
+        await apiWrite(data);
+        S = { view:'thread', catId, threadId: newThread.id };
+        render();
+    } catch(e) {
+        btn.disabled = false; btn.textContent = 'POST THREAD »';
+        errEl.textContent = 'Error: ' + e.message;
+    }
+}
+
+// ── HELPERS ───────────────────────────────────────────────────
+function h(s) {
+    return String(s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function err(msg) { return `<div class="error-msg">${h(msg)}</div>`; }
+
+function errBox(msg) {
+    return `<div class="error-msg">⚠ ${h(msg)}<br><br>
+        <button class="btn-back" onclick="nav('index')">« Forum Index</button>
+        &nbsp;<button class="btn-back" onclick="nav('setup')">⚙ Setup</button>
+    </div>`;
+}
+
+function loading(msg) {
+    return `<div class="loading-bar">${h(msg)}<span class="dots"></span></div>`;
+}
+
+function ts() {
+    const d = new Date(), p = n => String(n).padStart(2,'0');
+    return `${p(d.getMonth()+1)}/${p(d.getDate())}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
+function userEmoji(name) {
+    const pool = ['😀','😎','🤖','👾','🐱','🦊','🐸','🦄','🌟','🎮','🎨','🚀','🌈','🎸','⚡','🔥','🌙','💎','🎭','🦋'];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) & 0xFFFFFFFF;
+    return pool[Math.abs(hash) % pool.length];
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+if (!getKey() || !getBin()) {
+    viewSetup(false);
+} else {
+    nav('index');
+}
+</script>
 
 </body>
 </html>
