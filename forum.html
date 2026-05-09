@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Forum - DeadPixelWeb </title>
+    <title>Forum - The Hub</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tahoma&display=swap');
 
@@ -449,18 +449,26 @@
 // ================================================================
 //  THE HUB FORUM — Real persistent backend via JSONBin.io
 //
-//  SETUP INSTRUCTIONS:
-//  1. Go to https://jsonbin.io — create a free account
-//  2. Dashboard → API Keys → Create a Master Key
-//  3. Click "Configure" in the sidebar, paste the key, hit Connect
-//  4. Done! The forum auto-creates its storage bin on first use.
-//     All posts are stored on JSONBin and shared across visitors.
+//  FIRST-TIME SETUP (owner only):
+//  1. Go to https://jsonbin.io and create a free account
+//  2. Dashboard → API Keys → create a Master Key
+//  3. Open forum.html in a text editor and fill in the two
+//     constants below (FORUM_API_KEY and FORUM_BIN_ID).
+//     Leave FORUM_BIN_ID as '' on first run — the forum will
+//     create the bin and print the ID in the browser console.
+//     Then paste that ID back here and re-save.
+//  4. Upload forum.html. Everyone shares the same bin. Done.
+//
+//  To access owner setup UI: open forum.html#owner-setup
 // ================================================================
 
-const LS_KEY    = 'hubforum_apikey';
-const LS_BIN    = 'hubforum_binid';
-const LS_USER   = 'hubforum_username';
-const JBIN      = 'https://api.jsonbin.io/v3';
+// ▼▼▼ FILL THESE IN ▼▼▼
+const FORUM_API_KEY = '';   // your JSONBin Master Key
+const FORUM_BIN_ID  = '';   // your JSONBin Bin ID (auto-created on first run if blank)
+// ▲▲▲ FILL THESE IN ▲▲▲
+
+const LS_USER = 'hubforum_username';
+const JBIN    = 'https://api.jsonbin.io/v3';
 
 const CATEGORIES = [
     { id:1, icon:'💬', name:'General Chat',    desc:'Talk about anything and introduce yourself!' },
@@ -470,13 +478,11 @@ const CATEGORIES = [
     { id:5, icon:'⭐', name:'Site Feedback',   desc:'Suggestions and feedback for The Hub' },
 ];
 
-// ── localStorage helpers ──────────────────────────────────────
-const getKey  = ()  => localStorage.getItem(LS_KEY)  || '';
-const getBin  = ()  => localStorage.getItem(LS_BIN)  || '';
-const getUser = ()  => localStorage.getItem(LS_USER) || '';
-const setKey  = v   => localStorage.setItem(LS_KEY,  v);
-const setBin  = v   => localStorage.setItem(LS_BIN,  v);
-const setUser = v   => localStorage.setItem(LS_USER, v);
+// ── Credential resolution (hardcoded wins; localStorage is owner-only fallback) ──
+function getKey()  { return FORUM_API_KEY || localStorage.getItem('hubforum_owner_key') || ''; }
+function getBin()  { return FORUM_BIN_ID  || localStorage.getItem('hubforum_owner_bin') || ''; }
+const getUser = () => localStorage.getItem(LS_USER) || '';
+const setUser = v  => localStorage.setItem(LS_USER, v);
 
 // ── JSONBin API ───────────────────────────────────────────────
 async function apiRead() {
@@ -532,9 +538,9 @@ const mc = () => document.getElementById('main-content');
 
 // ── Render dispatch ───────────────────────────────────────────
 function render() {
-    if (!getKey() || !getBin()) { viewSetup(false); return; }
+    if (S.view === 'setup') { viewSetup(); return; }
+    if (!getKey() || !getBin()) { viewNotConfigured(); return; }
     switch (S.view) {
-        case 'setup':      viewSetup(true); break;
         case 'index':      viewIndex(); break;
         case 'category':   viewCategory(S.catId); break;
         case 'thread':     viewThread(S.threadId); break;
@@ -542,37 +548,59 @@ function render() {
     }
 }
 
-// ── SETUP ─────────────────────────────────────────────────────
-function viewSetup(voluntary) {
-    crumb(`<a href="index.html">Home</a> &gt; <a href="#" onclick="nav('index');return false;">Forum</a> &gt; Setup`);
+// ── NOT CONFIGURED (visitors never see setup UI) ──────────────
+function viewNotConfigured() {
+    crumb(`<a href="index.html">Home</a> &gt; Forum`);
     mc().innerHTML = `
     <div class="content-box">
-        <div class="box-title">⚙️ FORUM SETUP — JSONBIN.IO</div>
+        <div class="box-title">💬 THE HUB FORUM</div>
+        <div class="box-inner">
+            <p style="color:#AAAAAA;line-height:1.8;">
+                The forum is not yet configured. If you're the site owner,
+                open <code style="color:#FFFF00;background:#000022;padding:2px 5px;">forum.html</code> in a text editor and follow the setup instructions at the top of the &lt;script&gt; block.
+            </p>
+        </div>
+    </div>`;
+}
+
+// ── OWNER SETUP (only reachable via forum.html#owner-setup) ───
+function viewSetup() {
+    crumb(`<a href="index.html">Home</a> &gt; <a href="#" onclick="nav('index');return false;">Forum</a> &gt; Owner Setup`);
+    const storedKey = localStorage.getItem('hubforum_owner_key') || '';
+    const storedBin = localStorage.getItem('hubforum_owner_bin') || '';
+    mc().innerHTML = `
+    <div class="content-box">
+        <div class="box-title">⚙️ OWNER SETUP — JSONBIN.IO</div>
         <div class="box-inner">
             <div class="setup-box">
-                <h3>Connect to a real backend (free, ~2 minutes)</h3>
-                <p>This forum uses <a href="https://jsonbin.io" target="_blank">JSONBin.io</a> to store
-                posts. Anyone who visits your site will see the same real posts.</p>
+                <h3>One-time forum setup</h3>
+                <p>This stores your credentials in <em>this browser only</em> so you can test locally.
+                For production, open <code style="color:#FFFF00;">forum.html</code> in a text editor and paste
+                your key &amp; bin ID directly into the <code style="color:#FFFF00;">FORUM_API_KEY</code> and
+                <code style="color:#FFFF00;">FORUM_BIN_ID</code> constants at the top of the script — that way
+                everyone shares the same bin automatically.</p>
                 <hr class="divider">
                 <p><strong style="color:#FFFF00;">Step 1:</strong>
-                   Go to <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> and create a free account.</p>
+                   Go to <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> → create a free account.</p>
                 <p><strong style="color:#FFFF00;">Step 2:</strong>
-                   Go to <strong>Dashboard → API Keys</strong> and create a Master Key.</p>
+                   Dashboard → API Keys → create a Master Key.</p>
                 <p><strong style="color:#FFFF00;">Step 3:</strong>
-                   Paste it below and click Connect. Your forum storage will be created automatically.</p>
+                   Paste it below and click Connect. Bin is created automatically.</p>
+                <p><strong style="color:#FFFF00;">Step 4:</strong>
+                   Copy the Bin ID shown after connecting and hardcode it in the file.</p>
                 <hr class="divider">
                 <label style="color:#AAA;font-size:12px;display:block;margin-bottom:3px;">JSONBin Master Key:</label>
                 <input class="setup-input" id="s-key" type="password"
-                       placeholder="\$2b\$10\$..." value="${h(getKey())}">
+                       placeholder="\$2b\$10\$..." value="${h(storedKey)}">
                 <br><br>
                 <label style="color:#AAA;font-size:12px;display:block;margin-bottom:3px;">
                     Existing Bin ID <span style="color:#555;">(leave blank to auto-create)</span>:
                 </label>
                 <input class="setup-input" id="s-bin" type="text"
-                       placeholder="6abc12..." value="${h(getBin())}">
+                       placeholder="6abc12..." value="${h(storedBin)}">
                 <br><br>
                 <button class="btn-primary" id="s-btn" onclick="doSetup()">CONNECT »</button>
-                ${voluntary ? `&nbsp;<button class="btn-back" onclick="nav('index')">« Cancel</button>` : ''}
+                &nbsp;<button class="btn-back" onclick="nav('index')">« Cancel</button>
                 <div id="s-status" style="margin-top:10px;"></div>
             </div>
         </div>
@@ -598,14 +626,20 @@ async function doSetup() {
             binId = await apiCreateBin(key);
         }
 
-        setKey(key);
-        setBin(binId);
+        localStorage.setItem('hubforum_owner_key', key);
+        localStorage.setItem('hubforum_owner_bin', binId);
 
         statusEl.innerHTML = '<span style="color:#0088FF;">Verifying connection<span class="dots"></span></span>';
         await apiRead();
 
-        statusEl.innerHTML = `<span class="success-msg">✓ Connected! Bin ID: ${h(binId)}</span>`;
-        setTimeout(() => nav('index'), 1200);
+        statusEl.innerHTML = `
+            <span class="success-msg">✓ Connected! Bin ID: <strong>${h(binId)}</strong></span><br><br>
+            <span style="color:#FFCC00;font-size:12px;">
+            ➜ Now open forum.html in a text editor and set:<br>
+            <code style="color:#00FF88;">const FORUM_API_KEY = '${h(key)}';</code><br>
+            <code style="color:#00FF88;">const FORUM_BIN_ID  = '${h(binId)}';</code><br>
+            Then re-upload the file. Everyone will share this bin.
+            </span>`;
     } catch (e) {
         btn.disabled = false;
         btn.textContent = 'CONNECT »';
