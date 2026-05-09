@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forum - The Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tahoma&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000010;
+            background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+            color: #00FF00;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .marquee-bar {
+            background: linear-gradient(90deg, #000033, #001166, #000033);
+            border-top: 2px solid #0055FF;
+            border-bottom: 2px solid #0055FF;
+            padding: 4px 0;
+            color: #FFFF00;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .site-header {
+            background: linear-gradient(180deg, #000066 0%, #000033 40%, #000011 100%);
+            border-bottom: 3px solid #FFCC00;
+            padding: 12px 0 8px;
+        }
+
+        .site-title {
+            font-size: 36px;
+            font-weight: bold;
+            font-family: "Comic Sans MS", "Trebuchet MS", cursive;
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFFF00 40%, #FF9900 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 3px;
+        }
+
+        .page-label {
+            color: #00CCFF;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav-bar {
+            background: linear-gradient(180deg, #0000AA, #000066);
+            border-bottom: 2px solid #00CCFF;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-bar a {
+            display: inline-block;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 16px;
+            border-right: 1px solid #0055AA;
+            border-left: 1px solid #0055AA;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-bar a:hover, .nav-bar a.active {
+            background: linear-gradient(180deg, #0066FF, #0033AA);
+            color: #FFFF00;
+        }
+
+        .breadcrumb {
+            background: #000022;
+            border-bottom: 1px solid #003366;
+            padding: 4px 12px;
+            color: #555555;
+            font-size: 11px;
+            text-align: left;
+        }
+        .breadcrumb a { color: #0066CC; text-decoration: none; }
+
+        .wrapper {
+            max-width: 860px;
+            margin: 12px auto;
+            display: flex;
+            gap: 10px;
+            padding: 0 8px;
+            text-align: left;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar { width: 175px; flex-shrink: 0; }
+
+        .sidebar-box {
+            background: linear-gradient(180deg, #000066 0%, #000033 100%);
+            border: 2px solid #0066FF;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-box .box-title {
+            background: linear-gradient(90deg, #0000CC, #0055FF, #0000CC);
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+            border-bottom: 1px solid #00AAFF;
+            text-align: center;
+        }
+
+        .sidebar-box ul { list-style: none; padding: 6px 0; }
+        .sidebar-box ul li { border-bottom: 1px dotted #003366; }
+
+        .sidebar-box ul li a {
+            display: block;
+            color: #00CCFF;
+            text-decoration: none;
+            padding: 4px 10px;
+            font-size: 12px;
+        }
+
+        .sidebar-box ul li a:before { content: "» "; color: #FFFF00; }
+        .sidebar-box ul li a:hover { background: #001144; color: #FFFF00; }
+        .sidebar-box .box-inner { padding: 8px; }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content { flex: 1; min-width: 0; }
+
+        .content-box {
+            background: linear-gradient(180deg, #000044 0%, #000022 100%);
+            border: 2px solid #0066FF;
+            margin-bottom: 10px;
+        }
+
+        .content-box .box-title {
+            background: linear-gradient(90deg, #0000CC, #003399, #660000, #990000, #660000, #003399, #0000CC);
+            color: #FFFF00;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 5px 10px;
+            border-bottom: 1px solid #FF6600;
+            text-align: center;
+        }
+
+        .content-box .box-inner { padding: 12px; }
+
+        /* ===== FORUM CATEGORIES ===== */
+        .forum-categories-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4px;
+        }
+
+        .forum-categories-table .cat-header {
+            background: linear-gradient(90deg, #001166, #0033AA, #001166);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 10px;
+            border: 1px solid #0055AA;
+        }
+
+        .forum-cat-row {
+            cursor: pointer;
+        }
+
+        .forum-cat-row td {
+            padding: 8px 10px;
+            border: 1px solid #003366;
+            vertical-align: middle;
+        }
+
+        .forum-cat-row:hover td { background: #000055; }
+        .forum-cat-row:nth-child(even) td { background: #000033; }
+
+        .cat-icon { font-size: 20px; width: 36px; text-align: center; }
+
+        .cat-name {
+            color: #00CCFF;
+            font-weight: bold;
+            font-size: 13px;
+            text-decoration: none;
+        }
+        .cat-name:hover { color: #FFFF00; }
+
+        .cat-desc { color: #888888; font-size: 11px; margin-top: 2px; }
+
+        .cat-stats {
+            text-align: center;
+            font-size: 11px;
+            color: #666666;
+            width: 80px;
+        }
+
+        .cat-stats .stat-num { color: #FFCC00; font-weight: bold; font-size: 14px; display: block; }
+
+        .cat-lastpost {
+            font-size: 10px;
+            color: #555555;
+            width: 160px;
+        }
+
+        .cat-lastpost .lp-title { color: #00AAFF; }
+        .cat-lastpost .lp-author { color: #888888; }
+
+        /* ===== VIEW: THREAD LIST ===== */
+        .thread-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .thread-table .th-header {
+            background: linear-gradient(90deg, #001166, #0033AA, #001166);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 8px;
+            border: 1px solid #0055AA;
+            text-align: left;
+        }
+
+        .thread-row { cursor: pointer; }
+        .thread-row td {
+            padding: 7px 8px;
+            border: 1px solid #003366;
+            vertical-align: middle;
+        }
+
+        .thread-row:hover td { background: #000055; }
+        .thread-row:nth-child(even) td { background: #000033; }
+
+        .thread-icon { width: 28px; text-align: center; font-size: 16px; }
+
+        .thread-title-link {
+            color: #00CCFF;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .thread-title-link:hover { color: #FFFF00; }
+
+        .thread-starter {
+            color: #888888;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .thread-stats {
+            text-align: center;
+            font-size: 11px;
+            color: #666666;
+            width: 60px;
+        }
+
+        .thread-stats .ts-num { color: #AAFFAA; font-weight: bold; }
+
+        .thread-last {
+            font-size: 10px;
+            color: #555555;
+            width: 150px;
+        }
+
+        .thread-last .tl-time { color: #888888; }
+
+        .new-thread-btn {
+            background: linear-gradient(180deg, #005500, #003300);
+            border: 2px solid #00AA00;
+            color: #00FF00;
+            font-family: Tahoma, Verdana, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .new-thread-btn:hover {
+            background: linear-gradient(180deg, #007700, #004400);
+            color: #FFFF00;
+        }
+
+        .back-btn {
+            background: linear-gradient(180deg, #000066, #000033);
+            border: 2px solid #0066FF;
+            color: #00CCFF;
+            font-family: Tahoma, Verdana, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 8px;
+        }
+
+        .back-btn:hover { border-color: #00CCFF; color: #FFFF00; }
+
+        /* ===== VIEW: POST THREAD ===== */
+        .post-entry {
+            border-bottom: 1px solid #003366;
+            display: flex;
+            gap: 0;
+            margin-bottom: 0;
+        }
+
+        .post-entry:last-child { border-bottom: none; }
+
+        .post-userinfo {
+            width: 130px;
+            flex-shrink: 0;
+            background: #000033;
+            border-right: 1px solid #003366;
+            padding: 10px 8px;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        .post-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #000066, #001133);
+            border: 2px solid #003399;
+            margin: 0 auto 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .post-username {
+            color: #FFCC00;
+            font-weight: bold;
+            font-size: 12px;
+            word-break: break-all;
+        }
+
+        .post-rank {
+            color: #888888;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .post-postcount {
+            color: #555555;
+            font-size: 9px;
+            margin-top: 4px;
+        }
+
+        .post-main {
+            flex: 1;
+            padding: 8px 12px;
+        }
+
+        .post-header-bar {
+            background: #000033;
+            border-bottom: 1px solid #003366;
+            padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: -8px -12px 10px;
+        }
+
+        .post-number { color: #555555; font-size: 10px; }
+        .post-timestamp { color: #555555; font-size: 10px; }
+
+        .post-body-text {
+            color: #CCCCCC;
+            line-height: 1.7;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .post-sig {
+            border-top: 1px dashed #003366;
+            margin-top: 10px;
+            padding-top: 6px;
+            color: #555555;
+            font-size: 10px;
+            font-style: italic;
+        }
+
+        /* ===== REPLY FORM ===== */
+        .reply-form-box {
+            background: linear-gradient(180deg, #000044, #000022);
+            border: 2px solid #0066FF;
+            margin-bottom: 10px;
+        }
+
+        .reply-form-box .form-title {
+            background: linear-gradient(90deg, #000066, #0033AA, #000066);
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 10px;
+            border-bottom: 1px solid #0055AA;
+        }
+
+        .reply-form-inner { padding: 12px; }
+
+        .form-row {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-label {
+            color: #AAAAAA;
+            font-size: 12px;
+            font-weight: bold;
+            width: 90px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        .form-input {
+            background: #000022;
+            border: 1px solid #003366;
+            border-bottom: 2px solid #0055AA;
+            color: #00FF00;
+            font-family: Tahoma, Verdana, sans-serif;
+            font-size: 12px;
+            padding: 4px 6px;
+            outline: none;
+            flex: 1;
+        }
+
+        .form-input:focus {
+            border-color: #0066FF;
+            background: #000033;
+        }
+
+        .form-textarea {
+            background: #000022;
+            border: 1px solid #003366;
+            border-bottom: 2px solid #0055AA;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
+            font-size: 12px;
+            padding: 6px;
+            outline: none;
+            width: 100%;
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-textarea:focus {
+            border-color: #0066FF;
+            background: #000033;
+        }
+
+        .submit-btn {
+            background: linear-gradient(180deg, #004400, #002200);
+            border: 2px solid #00AA00;
+            color: #00FF00;
+            font-family: Tahoma, Verdana, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 18px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(180deg, #006600, #004400);
+            color: #FFFF00;
+        }
+
+        .new-thread-form-row {
+            margin-bottom: 8px;
+        }
+
+        /* ===== MISC ===== */
+        hr.divider {
+            border: none;
+            border-top: 1px solid #003366;
+            margin: 8px 0;
+        }
+
+        @keyframes blink-anim {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .online-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #00FF00;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s infinite;
+            vertical-align: middle;
+            margin-right: 3px;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .bottom-marquee {
+            background: linear-gradient(90deg, #110000, #001100, #000011, #110000);
+            border-top: 2px solid #333333;
+            padding: 5px 0;
+            color: #FFFF00;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .site-footer {
+            background: #000011;
+            border-top: 1px solid #333333;
+            padding: 8px;
+            color: #555555;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .site-footer a { color: #0055AA; }
+
+        .hidden { display: none; }
+
+        .tag-new {
+            background: #CC0000;
+            color: #FFFFFF;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 1px 4px;
+            border-radius: 2px;
+            margin-left: 4px;
+            vertical-align: middle;
+            animation: blink-anim 2s infinite;
+        }
+
+        .forum-stats-bar {
+            background: #000022;
+            border: 1px solid #003366;
+            padding: 6px 10px;
+            font-size: 11px;
+            color: #666666;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .forum-stats-bar span { color: #AAAAAA; }
+        .forum-stats-bar strong { color: #FFCC00; }
+    </style>
+</head>
+<body>
+
+<div class="marquee-bar">
+    <marquee behavior="scroll" direction="left" scrollamount="4">
+        ★ THE HUB FORUM ★ &nbsp;&nbsp; POST YOUR THOUGHTS!! &nbsp;&nbsp; ★ BE NICE OR GET BANNED ★ &nbsp;&nbsp; HAVE FUN!! &nbsp;&nbsp; ★
+    </marquee>
+</div>
+
+<div class="site-header">
+    <div class="site-title">✦ THE HUB ✦</div>
+    <div class="page-label">:: Community Forum ::</div>
+</div>
+
+<div class="nav-bar">
+    <a href="index.html">🏠 Home</a>
+    <a href="page2.html">📁 Page 2</a>
+    <a href="forum.html" class="active">💬 Forum</a>
+    <a href="credits.html">⭐ Credits</a>
+    <a href="#">📖 Guestbook</a>
+    <a href="#">🔗 Links</a>
+</div>
+
+<div class="breadcrumb" id="breadcrumb">
+    <a href="index.html">Home</a> &gt; <a href="forum.html" onclick="showForumIndex(); return false;">Forum</a>
+</div>
+
+<div class="wrapper">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-box">
+            <div class="box-title">📌 Navigation</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="page2.html">Page 2</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="credits.html">Credits</a></li>
+                <li><a href="#">Guestbook</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-box">
+            <div class="box-title">👥 Who's Online</div>
+            <div class="box-inner">
+                <p style="font-size:11px; color:#AAAAAA; line-height:1.7;">
+                    <span class="online-dot"></span><span style="color:#00FF00;">3 guests</span><br>
+                    <span class="online-dot" style="background:#FFFF00;"></span><span style="color:#FFFF00;">1 member</span>
+                </p>
+                <hr class="divider">
+                <p style="font-size:10px; color:#555555;">Members online:<br><span style="color:#FFCC00;">WEBMASTER</span></p>
+            </div>
+        </div>
+
+        <div class="sidebar-box">
+            <div class="box-title">📜 Forum Rules</div>
+            <div class="box-inner">
+                <p style="font-size:10px; color:#AAAAAA; line-height:1.8;">
+                    1. Be nice!!<br>
+                    2. No spam<br>
+                    3. No flaming<br>
+                    4. Stay on topic<br>
+                    5. Have fun!! :)
+                </p>
+            </div>
+        </div>
+
+        <div class="sidebar-box">
+            <div class="box-title">🏆 Top Posters</div>
+            <div class="box-inner">
+                <p style="font-size:11px; color:#AAAAAA; line-height:1.8;">
+                    🥇 <span style="color:#FFCC00;">WEBMASTER</span><br>
+                    &nbsp;&nbsp;&nbsp;<span style="color:#555555;">42 posts</span><br>
+                    🥈 <span style="color:#CCCCCC;">xXcoolkid99Xx</span><br>
+                    &nbsp;&nbsp;&nbsp;<span style="color:#555555;">31 posts</span><br>
+                    🥉 <span style="color:#CCCCCC;">gamer_girl</span><br>
+                    &nbsp;&nbsp;&nbsp;<span style="color:#555555;">19 posts</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT: dynamically rendered by JS -->
+    <div class="main-content" id="main-content">
+        <!-- Views rendered here -->
+    </div>
+
+</div>
+
+<div class="bottom-marquee">
+    <marquee behavior="scroll" scrollamount="3">
+        ✦ The Hub Forum ✦ &nbsp;&nbsp; Keep it clean, keep it fun!! &nbsp;&nbsp; ✦ Post count: <span id="total-posts-marquee">--</span> ✦
+    </marquee>
+</div>
+
+<div class="site-footer">
+    © 2005–2025 The Hub Forum &nbsp;|&nbsp; <a href="index.html">Home</a> &nbsp;|&nbsp; <a href="credits.html">Credits</a>
+    <br>Forum powered by HubBB v0.9 (custom)
+</div>
+
+<script>
+// =============================================
+//  THE HUB FORUM - Fully working (in-memory)
+// =============================================
+
+// Seed data
+const categories = [
+    {
+        id: 1,
+        icon: "💬",
+        name: "General Chat",
+        desc: "Talk about anything!! introduce yourself here too",
+    },
+    {
+        id: 2,
+        icon: "🎨",
+        name: "Creative Corner",
+        desc: "Share your art, writing, music and other creative stuff",
+    },
+    {
+        id: 3,
+        icon: "🎮",
+        name: "Games & Tech",
+        desc: "Video games, computers, internet stuff",
+    },
+    {
+        id: 4,
+        icon: "🌐",
+        name: "Web Design Help",
+        desc: "Ask for help with HTML, CSS, your own website",
+    },
+    {
+        id: 5,
+        icon: "⭐",
+        name: "Site Feedback",
+        desc: "Suggestions and feedback for The Hub",
+    },
+];
+
+// Seed threads and posts
+let threads = [
+    {
+        id: 1, catId: 1, title: "WELCOME to the forum!! introduce yourself :)",
+        author: "WEBMASTER", date: "03/10/2005 14:22", views: 312, pinned: true,
+        posts: [
+            { id: 1, author: "WEBMASTER", date: "03/10/2005 14:22", rank: "Admin", posts: 42,
+              avatar: "🌟", sig: "~ WEBMASTER of The Hub ~",
+              body: "hey everyone!! welcome to the official Hub forum!!\n\nthis is the place to chat, share stuff, ask questions, whatever :)\n\nplease introduce yourself below!! tell us:\n- your name/username\n- where youre from\n- how you found this site\n- what you're into\n\nhave fun and be nice to each other!! 💛" },
+            { id: 2, author: "xXcoolkid99Xx", date: "03/11/2005 09:45", rank: "Member", posts: 31,
+              avatar: "😎", sig: "xXcoolkid99Xx | AIM: coolkid99x",
+              body: "hey!! i found this site through a link on myspace lol\nim 16 from california and i like gaming and drawing\ngreat site btw webmaster!!" },
+            { id: 3, author: "gamer_girl_2005", date: "03/11/2005 16:30", rank: "Member", posts: 19,
+              avatar: "🎮", sig: "// gamer_girl_2005 // n00b but learning //",
+              body: "omg hi everyone!! so glad i found this place\nim from ohio and i looooove RPG games and anime\nalso i have my own website too if anyone wants to check it out hehe" },
+            { id: 4, author: "html_wizard", date: "03/12/2005 11:00", rank: "Member", posts: 7,
+              avatar: "💻", sig: null,
+              body: "cool site! i do web design stuff so if anyone needs help just ask :)" },
+        ]
+    },
+    {
+        id: 2, catId: 1, title: "what music are you listening to rn??",
+        author: "gamer_girl_2005", date: "03/12/2005 17:00", views: 88, pinned: false,
+        posts: [
+            { id: 1, author: "gamer_girl_2005", date: "03/12/2005 17:00", rank: "Member", posts: 19,
+              avatar: "🎮", sig: "// gamer_girl_2005 // n00b but learning //",
+              body: "title!!! what is everyone listening to right now\n\ni cannot stop listening to evanescence omg 🖤" },
+            { id: 2, author: "xXcoolkid99Xx", date: "03/12/2005 18:22", rank: "Member", posts: 31,
+              avatar: "😎", sig: "xXcoolkid99Xx | AIM: coolkid99x",
+              body: "dude evanescence goes so hard\nim listening to linkin park rn lol classic" },
+            { id: 3, author: "WEBMASTER", date: "03/13/2005 10:05", rank: "Admin", posts: 42,
+              avatar: "🌟", sig: "~ WEBMASTER of The Hub ~",
+              body: "ooh good thread\nim on a total my chemical romance phase lately not gonna lie lol" },
+        ]
+    },
+    {
+        id: 3, catId: 2, title: "post your drawings here!! :D",
+        author: "WEBMASTER", date: "03/10/2005 15:00", views: 201, pinned: true,
+        posts: [
+            { id: 1, author: "WEBMASTER", date: "03/10/2005 15:00", rank: "Admin", posts: 42,
+              avatar: "🌟", sig: "~ WEBMASTER of The Hub ~",
+              body: "sticky thread for everyone to share their art!!\n\npost drawings, sketches, doodles, whatever you made :)\nno stealing and give credit if its fanart please" },
+            { id: 2, author: "xXcoolkid99Xx", date: "03/11/2005 20:10", rank: "Member", posts: 31,
+              avatar: "😎", sig: "xXcoolkid99Xx | AIM: coolkid99x",
+              body: "i dont have a scanner but i drew a really cool dragon last night\nill try to take a photo of it and upload sometime!!" },
+        ]
+    },
+    {
+        id: 4, catId: 3, title: "whats everyone playing right now",
+        author: "xXcoolkid99Xx", date: "03/11/2005 21:00", views: 145, pinned: false,
+        posts: [
+            { id: 1, author: "xXcoolkid99Xx", date: "03/11/2005 21:00", rank: "Member", posts: 31,
+              avatar: "😎", sig: "xXcoolkid99Xx | AIM: coolkid99x",
+              body: "just got into world of warcraft omg its addicting lol\nwhat games is everyone else into??" },
+            { id: 2, author: "gamer_girl_2005", date: "03/12/2005 08:30", rank: "Member", posts: 19,
+              avatar: "🎮", sig: "// gamer_girl_2005 // n00b but learning //",
+              body: "i play final fantasy x2 mostly\nalso runescape sometimes hehe dont judge me 😭" },
+        ]
+    },
+    {
+        id: 5, catId: 4, title: "how do i make text blink in html??",
+        author: "html_wizard", date: "03/12/2005 12:30", views: 67, pinned: false,
+        posts: [
+            { id: 1, author: "html_wizard", date: "03/12/2005 12:30", rank: "Member", posts: 7,
+              avatar: "💻", sig: null,
+              body: "someone asked me this so im posting it here for everyone!!\n\nto make blinking text use CSS animation:\n\n.blink {\n  animation: blink 1s infinite;\n}\n@keyframes blink {\n  50% { opacity: 0; }\n}\n\nput class=\"blink\" on whatever text u want to blink :)" },
+            { id: 2, author: "WEBMASTER", date: "03/12/2005 13:00", rank: "Admin", posts: 42,
+              avatar: "🌟", sig: "~ WEBMASTER of The Hub ~",
+              body: "omg THANK U i was wondering this lol\nstickying this for future reference" },
+        ]
+    },
+    {
+        id: 6, catId: 5, title: "love the site!! a few suggestions",
+        author: "gamer_girl_2005", date: "03/13/2005 14:00", views: 52, pinned: false,
+        posts: [
+            { id: 1, author: "gamer_girl_2005", date: "03/13/2005 14:00", rank: "Member", posts: 19,
+              avatar: "🎮", sig: "// gamer_girl_2005 // n00b but learning //",
+              body: "hey webmaster!! love the new forum :D\n\na few ideas:\n- could u add an avatar system??\n- maybe a chatbox on the homepage\n- and a dark/light mode toggle lol\n\njust ideas!! the site is great as-is too" },
+            { id: 2, author: "WEBMASTER", date: "03/13/2005 15:30", rank: "Admin", posts: 42,
+              avatar: "🌟", sig: "~ WEBMASTER of The Hub ~",
+              body: "these are really good ideas omg\navatars are on my list definitely!!\nchatbox might be hard but ill look into it :)" },
+        ]
+    },
+];
+
+let nextThreadId = threads.reduce((m, t) => Math.max(m, t.id), 0) + 1;
+let state = { view: 'index', catId: null, threadId: null };
+
+// Utility
+function timeAgo(dateStr) {
+    return dateStr; // keep date as-is for 2000s feel
+}
+
+function totalPosts() {
+    return threads.reduce((s, t) => s + t.posts.length, 0);
+}
+
+function updateMarqueeCount() {
+    const el = document.getElementById('total-posts-marquee');
+    if (el) el.textContent = totalPosts();
+}
+
+// =============================================
+//  VIEWS
+// =============================================
+
+function showForumIndex() {
+    state = { view: 'index', catId: null, threadId: null };
+    document.getElementById('breadcrumb').innerHTML =
+        `<a href="index.html">Home</a> &gt; <a href="forum.html" onclick="showForumIndex();return false;">Forum</a>`;
+    renderForumIndex();
+}
+
+function showCategory(catId) {
+    state = { view: 'category', catId: catId, threadId: null };
+    const cat = categories.find(c => c.id === catId);
+    document.getElementById('breadcrumb').innerHTML =
+        `<a href="index.html">Home</a> &gt; <a href="#" onclick="showForumIndex();return false;">Forum</a> &gt; ${cat.name}`;
+    renderCategory(catId);
+}
+
+function showThread(threadId) {
+    state = { view: 'thread', catId: state.catId, threadId: threadId };
+    const thread = threads.find(t => t.id === threadId);
+    const cat = categories.find(c => c.id === thread.catId);
+    state.catId = thread.catId;
+    document.getElementById('breadcrumb').innerHTML =
+        `<a href="index.html">Home</a> &gt; <a href="#" onclick="showForumIndex();return false;">Forum</a> &gt;
+         <a href="#" onclick="showCategory(${cat.id});return false;">${cat.name}</a> &gt; ${thread.title}`;
+    thread.views++;
+    renderThread(threadId);
+}
+
+function showNewThreadForm(catId) {
+    state = { view: 'new-thread', catId: catId, threadId: null };
+    const cat = categories.find(c => c.id === catId);
+    document.getElementById('breadcrumb').innerHTML =
+        `<a href="index.html">Home</a> &gt; <a href="#" onclick="showForumIndex();return false;">Forum</a> &gt;
+         <a href="#" onclick="showCategory(${catId});return false;">${cat.name}</a> &gt; New Thread`;
+    renderNewThreadForm(catId);
+}
+
+// =============================================
+//  RENDER FUNCTIONS
+// =============================================
+
+function renderForumIndex() {
+    updateMarqueeCount();
+    let html = `
+    <div class="content-box">
+        <div class="box-title">💬 THE HUB FORUM - MAIN INDEX</div>
+        <div class="box-inner" style="padding:0;">
+            <div class="forum-stats-bar">
+                <span>Total posts: <strong>${totalPosts()}</strong></span>
+                <span>Threads: <strong>${threads.length}</strong></span>
+                <span>Members: <strong>12</strong></span>
+            </div>
+            <table class="forum-categories-table">
+                <tr>
+                    <td class="cat-header" colspan="2">Forum</td>
+                    <td class="cat-header" style="width:80px;text-align:center;">Threads</td>
+                    <td class="cat-header" style="width:80px;text-align:center;">Posts</td>
+                    <td class="cat-header" style="width:160px;">Last Post</td>
+                </tr>`;
+
+    for (const cat of categories) {
+        const catThreads = threads.filter(t => t.catId === cat.id);
+        const catPosts = catThreads.reduce((s, t) => s + t.posts.length, 0);
+        const lastThread = catThreads.sort((a, b) => b.id - a.id)[0];
+        const lastPost = lastThread ? lastThread.posts[lastThread.posts.length - 1] : null;
+
+        html += `
+                <tr class="forum-cat-row" onclick="showCategory(${cat.id})">
+                    <td class="cat-icon">${cat.icon}</td>
+                    <td>
+                        <span class="cat-name">${cat.name}</span>
+                        <div class="cat-desc">${cat.desc}</div>
+                    </td>
+                    <td class="cat-stats"><span class="stat-num">${catThreads.length}</span>threads</td>
+                    <td class="cat-stats"><span class="stat-num">${catPosts}</span>posts</td>
+                    <td class="cat-lastpost">
+                        ${lastPost ? `
+                        <div class="lp-title" onclick="event.stopPropagation();showThread(${lastThread.id})" style="cursor:pointer;">${lastThread.title.substring(0,28)}${lastThread.title.length>28?'...':''}</div>
+                        <div class="lp-author">by ${lastPost.author}<br>${lastPost.date.split(' ')[0]}</div>
+                        ` : '<span style="color:#333">no posts yet</span>'}
+                    </td>
+                </tr>`;
+    }
+
+    html += `
+            </table>
+        </div>
+    </div>
+    <div style="color:#555555; font-size:11px; text-align:right; padding:4px 0;">
+        Click any category to browse threads
+    </div>`;
+
+    document.getElementById('main-content').innerHTML = html;
+}
+
+function renderCategory(catId) {
+    const cat = categories.find(c => c.id === catId);
+    const catThreads = threads.filter(t => t.catId === catId).sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        return b.id - a.id;
+    });
+
+    let html = `
+    <div class="content-box">
+        <div class="box-title">${cat.icon} ${cat.name.toUpperCase()}</div>
+        <div class="box-inner" style="padding-bottom:10px;">
+            <div style="margin-bottom:8px;">
+                <button class="back-btn" onclick="showForumIndex()">« Forum Index</button>
+                <button class="new-thread-btn" onclick="showNewThreadForm(${catId})">+ New Thread</button>
+            </div>
+            <table class="thread-table">
+                <tr>
+                    <td class="th-header" colspan="2">Thread</td>
+                    <td class="th-header" style="width:65px;text-align:center;">Replies</td>
+                    <td class="th-header" style="width:65px;text-align:center;">Views</td>
+                    <td class="th-header" style="width:150px;">Last Post</td>
+                </tr>`;
+
+    if (catThreads.length === 0) {
+        html += `<tr><td colspan="5" style="padding:20px;text-align:center;color:#555555;border:1px solid #003366;">No threads yet — be the first to post!</td></tr>`;
+    } else {
+        for (const t of catThreads) {
+            const lastPost = t.posts[t.posts.length - 1];
+            html += `
+                <tr class="thread-row" onclick="showThread(${t.id})">
+                    <td class="thread-icon">${t.pinned ? '📌' : '💬'}</td>
+                    <td>
+                        <span class="thread-title-link">${t.title}${t.pinned ? ' <span class="tag-new">STICKY</span>' : ''}</span>
+                        <div class="thread-starter">by ${t.author} · ${t.date}</div>
+                    </td>
+                    <td class="thread-stats"><span class="ts-num">${t.posts.length - 1}</span></td>
+                    <td class="thread-stats"><span class="ts-num">${t.views}</span></td>
+                    <td class="thread-last">
+                        <div style="color:#00AAFF;">${lastPost.author}</div>
+                        <div class="tl-time">${lastPost.date}</div>
+                    </td>
+                </tr>`;
+        }
+    }
+
+    html += `
+            </table>
+        </div>
+    </div>`;
+
+    document.getElementById('main-content').innerHTML = html;
+}
+
+function renderThread(threadId) {
+    const thread = threads.find(t => t.id === threadId);
+    const cat = categories.find(c => c.id === thread.catId);
+
+    let html = `
+    <div class="content-box">
+        <div class="box-title">💬 ${thread.title}</div>
+        <div class="box-inner" style="padding:8px;">
+            <div style="margin-bottom:8px;">
+                <button class="back-btn" onclick="showCategory(${thread.catId})">« ${cat.name}</button>
+                <span style="color:#555555;font-size:11px;">Thread started by <span style="color:#FFCC00;">${thread.author}</span> · ${thread.date} · ${thread.views} views</span>
+            </div>
+        </div>`;
+
+    for (let i = 0; i < thread.posts.length; i++) {
+        const p = thread.posts[i];
+        html += `
+            <div class="post-entry">
+                <div class="post-userinfo">
+                    <div class="post-avatar">${p.avatar || '👤'}</div>
+                    <div class="post-username">${p.author}</div>
+                    <div class="post-rank">${p.rank || 'Member'}</div>
+                    <div class="post-postcount">Posts: ${p.posts}</div>
+                </div>
+                <div class="post-main">
+                    <div class="post-header-bar">
+                        <span class="post-number">Post #${i+1}</span>
+                        <span class="post-timestamp">📅 ${p.date}</span>
+                    </div>
+                    <div class="post-body-text">${escapeHtml(p.body)}</div>
+                    ${p.sig ? `<div class="post-sig">${escapeHtml(p.sig)}</div>` : ''}
+                </div>
+            </div>`;
+    }
+
+    html += `</div>`;
+
+    // Reply form
+    html += `
+    <div class="reply-form-box">
+        <div class="form-title">✏️ Post a Reply</div>
+        <div class="reply-form-inner">
+            <div class="form-row">
+                <label class="form-label">Username:</label>
+                <input class="form-input" id="reply-author" type="text" placeholder="Your username" maxlength="30" style="max-width:200px;">
+            </div>
+            <div class="new-thread-form-row" style="margin-top:4px;">
+                <textarea class="form-textarea" id="reply-body" placeholder="Write your reply here..."></textarea>
+            </div>
+            <div style="margin-top:8px; display:flex; align-items:center; gap:12px;">
+                <button class="submit-btn" onclick="submitReply(${threadId})">POST REPLY »</button>
+                <span id="reply-error" style="color:#FF4444;font-size:11px;"></span>
+            </div>
+        </div>
+    </div>`;
+
+    document.getElementById('main-content').innerHTML = html;
+    document.getElementById('main-content').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderNewThreadForm(catId) {
+    const cat = categories.find(c => c.id === catId);
+
+    const html = `
+    <div class="reply-form-box" style="border-color:#FFCC00;">
+        <div class="form-title" style="background:linear-gradient(90deg,#442200,#885500,#442200);">📝 NEW THREAD IN: ${cat.name.toUpperCase()}</div>
+        <div class="reply-form-inner">
+            <div style="margin-bottom:10px;">
+                <button class="back-btn" onclick="showCategory(${catId})">« Back to ${cat.name}</button>
+            </div>
+            <div class="form-row">
+                <label class="form-label">Username:</label>
+                <input class="form-input" id="nt-author" type="text" placeholder="Your username" maxlength="30" style="max-width:200px;">
+            </div>
+            <div class="form-row">
+                <label class="form-label">Thread Title:</label>
+                <input class="form-input" id="nt-title" type="text" placeholder="Thread title..." maxlength="100">
+            </div>
+            <div class="new-thread-form-row" style="margin-top:6px;">
+                <textarea class="form-textarea" id="nt-body" placeholder="Write your post here..." style="min-height:120px;"></textarea>
+            </div>
+            <div style="margin-top:10px; display:flex; align-items:center; gap:12px;">
+                <button class="submit-btn" onclick="submitNewThread(${catId})">POST THREAD »</button>
+                <span id="nt-error" style="color:#FF4444;font-size:11px;"></span>
+            </div>
+        </div>
+    </div>`;
+
+    document.getElementById('main-content').innerHTML = html;
+}
+
+// =============================================
+//  ACTIONS
+// =============================================
+
+function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function getTimestamp() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    return `${pad(now.getMonth()+1)}/${pad(now.getDate())}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+}
+
+function submitReply(threadId) {
+    const author = document.getElementById('reply-author').value.trim();
+    const body = document.getElementById('reply-body').value.trim();
+    const errEl = document.getElementById('reply-error');
+
+    if (!author) { errEl.textContent = 'Please enter a username!'; return; }
+    if (!body) { errEl.textContent = 'Please write something!'; return; }
+    if (author.length < 2) { errEl.textContent = 'Username too short!'; return; }
+
+    const thread = threads.find(t => t.id === threadId);
+    const newPost = {
+        id: thread.posts.length + 1,
+        author: author,
+        date: getTimestamp(),
+        rank: 'Guest',
+        posts: 1,
+        avatar: '👤',
+        sig: null,
+        body: body
+    };
+
+    thread.posts.push(newPost);
+    renderThread(threadId);
+
+    // Scroll to last post
+    setTimeout(() => {
+        const entries = document.querySelectorAll('.post-entry');
+        if (entries.length) entries[entries.length-1].scrollIntoView({ behavior:'smooth' });
+    }, 100);
+}
+
+function submitNewThread(catId) {
+    const author = document.getElementById('nt-author').value.trim();
+    const title = document.getElementById('nt-title').value.trim();
+    const body = document.getElementById('nt-body').value.trim();
+    const errEl = document.getElementById('nt-error');
+
+    if (!author) { errEl.textContent = 'Please enter a username!'; return; }
+    if (!title) { errEl.textContent = 'Please enter a thread title!'; return; }
+    if (!body) { errEl.textContent = 'Please write something!'; return; }
+
+    const newThread = {
+        id: nextThreadId++,
+        catId: catId,
+        title: title,
+        author: author,
+        date: getTimestamp(),
+        views: 1,
+        pinned: false,
+        posts: [{
+            id: 1,
+            author: author,
+            date: getTimestamp(),
+            rank: 'Guest',
+            posts: 1,
+            avatar: '👤',
+            sig: null,
+            body: body
+        }]
+    };
+
+    threads.unshift(newThread);
+    showThread(newThread.id);
+}
+
+// =============================================
+//  INIT
+// =============================================
+showForumIndex();
+updateMarqueeCount();
+</script>
+
+</body>
+</html>
