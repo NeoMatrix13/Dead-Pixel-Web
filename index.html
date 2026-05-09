@@ -1,107 +1,513 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Homepage</title>
+    <title>The Hub - Home</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tahoma&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
-            background-color: black;
-            color: lime;
-            font-family: "Courier New", cursive;
+            background-color: #000010;
+            background-image: url("https://www.transparenttextures.com/patterns/stars.png");
+            color: #00FF00;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+            font-size: 13px;
             text-align: center;
         }
 
-        table {
-            margin: auto;
-            border: 3px solid yellow;
-            background-color: #000033;
-            width: 800px;
+        /* ===== MARQUEE BAR ===== */
+        .marquee-bar {
+            background: linear-gradient(90deg, #000033, #001166, #000033);
+            border-top: 2px solid #0055FF;
+            border-bottom: 2px solid #0055FF;
+            padding: 4px 0;
+            color: #FFFF00;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 2px;
         }
 
-        td {
-            padding: 10px;
-            border: 1px solid cyan;
+        /* ===== HEADER ===== */
+        .site-header {
+            background: linear-gradient(180deg, #000066 0%, #000033 40%, #000011 100%);
+            border-bottom: 3px solid #FFCC00;
+            padding: 12px 0 8px;
         }
 
-        a {
-            color: lime;
-            text-decoration: none;
+        .site-title {
+            font-size: 36px;
+            font-weight: bold;
+            font-family: "Comic Sans MS", "Trebuchet MS", cursive;
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFFF00 40%, #FF9900 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+            letter-spacing: 3px;
+            animation: blink-title 3s infinite;
         }
 
-        a:hover {
-            color: aqua;
-            text-decoration: dotted underline;
+        @keyframes blink-title {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0.4; }
         }
 
-        .blink {
-            animation: blink 1s infinite;
+        .site-subtitle {
+            color: #AAAAFF;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 2px;
         }
 
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
+        /* ===== NAV BAR ===== */
+        .nav-bar {
+            background: linear-gradient(180deg, #0000AA, #000066);
+            border-bottom: 2px solid #00CCFF;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 0;
         }
 
-        .counter {
-            background: black;
-            color: red;
-            font-family: monospace;
-            padding: 5px;
-            border: 2px inset gray;
+        .nav-bar a {
             display: inline-block;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 16px;
+            border-right: 1px solid #0055AA;
+            border-left: 1px solid #0055AA;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.1s;
+        }
+
+        .nav-bar a:hover, .nav-bar a.active {
+            background: linear-gradient(180deg, #0066FF, #0033AA);
+            color: #FFFF00;
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .wrapper {
+            max-width: 820px;
+            margin: 12px auto;
+            display: flex;
+            gap: 10px;
+            padding: 0 8px;
+            text-align: left;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 180px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-box {
+            background: linear-gradient(180deg, #000066 0%, #000033 100%);
+            border: 2px solid #0066FF;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-box .box-title {
+            background: linear-gradient(90deg, #0000CC, #0055FF, #0000CC);
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+            border-bottom: 1px solid #00AAFF;
+            text-align: center;
+        }
+
+        .sidebar-box ul {
+            list-style: none;
+            padding: 6px 0;
+        }
+
+        .sidebar-box ul li {
+            border-bottom: 1px dotted #003366;
+        }
+
+        .sidebar-box ul li a {
+            display: block;
+            color: #00CCFF;
+            text-decoration: none;
+            padding: 4px 10px;
+            font-size: 12px;
+        }
+
+        .sidebar-box ul li a:before {
+            content: "» ";
+            color: #FFFF00;
+        }
+
+        .sidebar-box ul li a:hover {
+            background: #001144;
+            color: #FFFF00;
+        }
+
+        .sidebar-box .box-inner {
+            padding: 8px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .content-box {
+            background: linear-gradient(180deg, #000044 0%, #000022 100%);
+            border: 2px solid #0066FF;
+            margin-bottom: 10px;
+        }
+
+        .content-box .box-title {
+            background: linear-gradient(90deg, #0000CC, #003399, #660000, #990000, #660000, #003399, #0000CC);
+            color: #FFFF00;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 5px 10px;
+            border-bottom: 1px solid #FF6600;
+            text-align: center;
+        }
+
+        .content-box .box-inner {
+            padding: 12px;
+        }
+
+        .welcome-text {
+            color: #CCFFCC;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .welcome-text b { color: #FFFF00; }
+
+        /* ===== VIDEO AREA ===== */
+        .video-container {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .video-label {
+            color: #FF9900;
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: blink-anim 1s infinite;
+            margin-bottom: 6px;
+        }
+
+        @keyframes blink-anim {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        video {
+            border: 3px solid #FFCC00;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* ===== UPDATE LOG ===== */
+        .update-entry {
+            border-bottom: 1px dotted #003366;
+            padding: 6px 0;
+            color: #CCCCCC;
+        }
+
+        .update-entry:last-child { border-bottom: none; }
+
+        .update-date {
+            color: #FF9900;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .update-entry p { color: #AAFFAA; margin-top: 2px; }
+
+        /* ===== VISITOR COUNTER ===== */
+        .counter-display {
+            background: #000000;
+            border: 2px inset #444444;
+            color: #FF0000;
+            font-family: "Courier New", monospace;
+            font-size: 20px;
+            letter-spacing: 4px;
+            padding: 6px 12px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .counter-label {
+            color: #888888;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        /* ===== GIF AREA ===== */
+        .gif-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 8px 0;
+        }
+
+        .gif-row img {
+            border: 2px solid #FFFF00;
+        }
+
+        /* ===== MARQUEE ===== */
+        .bottom-marquee {
+            background: linear-gradient(90deg, #110000, #001100, #000011, #110000);
+            border-top: 2px solid #333333;
+            padding: 5px 0;
+            color: #FFFF00;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FOOTER ===== */
+        .site-footer {
+            background: #000011;
+            border-top: 1px solid #333333;
+            padding: 8px;
+            color: #555555;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .site-footer a { color: #0055AA; }
+
+        /* ===== BLINKIES ===== */
+        .blinkie-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .blinkie {
+            background: linear-gradient(90deg, #FF0000, #FF6600);
+            color: #FFFFFF;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 2px 5px;
+            border: 1px solid #FF9900;
+            letter-spacing: 1px;
+            animation: blink-anim 1.5s infinite;
+        }
+
+        .blinkie:nth-child(2) { background: linear-gradient(90deg, #0000CC, #6600CC); animation-delay: 0.3s; }
+        .blinkie:nth-child(3) { background: linear-gradient(90deg, #006600, #00CC00); animation-delay: 0.6s; }
+
+        .online-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #00FF00;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s infinite;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 4px #00FF00; }
+            50% { opacity: 0.4; box-shadow: none; }
+        }
+
+        .rainbow-text {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, violet, red);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbow-flow 3s linear infinite;
+            font-weight: bold;
+        }
+
+        @keyframes rainbow-flow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        hr.divider {
+            border: none;
+            border-top: 1px solid #003366;
+            margin: 8px 0;
         }
     </style>
 </head>
-
 <body>
 
-    <marquee behavior="scroll" direction="left" scrollamount="5">
-      * UNDER CONSTRUCTION *
+<div class="marquee-bar">
+    <marquee behavior="scroll" direction="left" scrollamount="4">
+        ★ WELCOME TO THE HUB ★ &nbsp;&nbsp;&nbsp; UNDER CONSTRUCTION &nbsp;&nbsp;&nbsp; ★ NEW: FORUM IS LIVE! ★ &nbsp;&nbsp;&nbsp; CHECK OUT PAGE 2! &nbsp;&nbsp;&nbsp; ★ THANKS FOR VISITING ★
     </marquee>
+</div>
 
-    <h1 class="blink">The Hub</h1>
+<div class="site-header">
+    <div class="site-title">✦ THE HUB ✦</div>
+    <div class="site-subtitle">:: Your #1 Source for Creative Content ::</div>
+</div>
 
-    <table>
-        <tr>
-            <td colspan="2">
-                <h2>A website to upload creative content</h2>
-            </td>
-        </tr>
+<div class="nav-bar">
+    <a href="index.html" class="active">🏠 Home</a>
+    <a href="page2.html">📁 Page 2</a>
+    <a href="forum.html">💬 Forum</a>
+    <a href="credits.html">⭐ Credits</a>
+    <a href="#">📖 Guestbook</a>
+    <a href="#">🔗 Links</a>
+</div>
 
-        <tr>
-            <td width="200">
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a href="https://www.youtube.com/channel/UC7_ciyjLpVArrzP6wj1X-rQ">Youtube Channel</a></li>
-                    <li><a href="page2.html">Page 2</a></li>
-                    <li><a href="credits.html">Credits</a></li>
-                    <li><a href="#">Links</a></li>
-                </ul>
-            </td>
+<div class="wrapper">
 
-            <td>                            
-                <p class="blink">** Watch This While I Make The Website **</p>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-                <br>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/MwPAD5V8yrc?si=gTwuRWvVugMAH9Sy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-    
-                </iframe>
-            </td>
-        </tr>
+        <div class="sidebar-box">
+            <div class="box-title">📌 Navigation</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="page2.html">Page 2</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="credits.html">Credits</a></li>
+                <li><a href="#">Guestbook</a></li>
+                <li><a href="#">Links</a></li>
+                <li><a href="https://www.youtube.com/channel/UC7_ciyjLpVArrzP6wj1X-rQ" target="_blank">YouTube ↗</a></li>
+            </ul>
+        </div>
 
-        <tr>
-            <td colspan="2">
-                <h3>Go Back</h3>
+        <div class="sidebar-box">
+            <div class="box-title">👁 Visitors</div>
+            <div class="box-inner" style="text-align:center;">
+                <div class="counter-display" id="visit-counter">004271</div>
+                <span class="counter-label">hits since 2005</span>
+                <hr class="divider">
+                <span class="online-dot"></span>
+                <span style="color:#00FF00; font-size:11px;">3 online now</span>
+            </div>
+        </div>
 
-                <p>
-                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDhwZnBiMGEyYTVkYWNjbTgyaGp3amFtYmVvdzFuZzdvY2xqb2V5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/hFfi5paUIbE0Ejh8hF/giphy.gif"height="200" width="200">
+        <div class="sidebar-box">
+            <div class="box-title">⚠ Status</div>
+            <div class="box-inner">
+                <p style="color:#FF9900; font-size:11px; animation: blink-anim 1s infinite;">🚧 SITE UNDER CONSTRUCTION 🚧</p>
+                <hr class="divider">
+                <p style="color:#AAAAAA; font-size:10px; line-height:1.5;">
+                    Last Updated:<br>
+                    <span style="color:#FFFF00;">May 2025</span>
                 </p>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
 
-    <marquee behavior="alternate"> Thanks for visiting</marquee>
+        <div class="sidebar-box">
+            <div class="box-title">🌟 Blinkies</div>
+            <div class="box-inner">
+                <div class="blinkie-row">
+                    <div class="blinkie">COOL SITE</div>
+                    <div class="blinkie">HTML NERD</div>
+                    <div class="blinkie">WEBMASTER</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <div class="content-box">
+            <div class="box-title">⭐ WELCOME TO THE HUB ⭐</div>
+            <div class="box-inner">
+                <p class="welcome-text">
+                    <b>Hey there and welcome!!</b> This is my personal website where I upload 
+                    all my <b>creative content</b>. Still working on it so things might look 
+                    a bit messy. Check back often for updates!! 🎉
+                </p>
+                <p class="welcome-text">
+                    Make sure to sign the <b>guestbook</b> and leave a comment on the <b>forum</b>! 
+                    Also check out my <b><a href="https://www.youtube.com/channel/UC7_ciyjLpVArrzP6wj1X-rQ" 
+                    target="_blank" style="color:#FFFF00;">YouTube channel</a></b> for videos!
+                </p>
+                <div class="gif-row">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDhwZnBiMGEyYTVkYWNjbTgyaGp3amFtYmVvdzFuZzdvY2xqb2V5ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/hFfi5paUIbE0Ejh8hF/giphy.gif" height="80" width="80" alt="cool gif">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <div class="box-title">📺 WATCH THIS WHILE I MAKE THE SITE</div>
+            <div class="box-inner">
+                <div class="video-container">
+                    <div class="video-label">▶ now playing ◀</div>
+                    <video controls width="400" autoplay muted>
+                        <source src="video.mp4">
+                        <p style="color:#FF6666;">Video not found. Upload video.mp4 to this folder!</p>
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <div class="box-title">📋 SITE UPDATE LOG</div>
+            <div class="box-inner">
+                <div class="update-entry">
+                    <span class="update-date">[ May 2025 ]</span>
+                    <p>» Added forum page!! Finally!! go post something :)</p>
+                </div>
+                <div class="update-entry">
+                    <span class="update-date">[ Apr 2025 ]</span>
+                    <p>» Redesigned homepage, new nav bar, added visitor counter</p>
+                </div>
+                <div class="update-entry">
+                    <span class="update-date">[ Mar 2025 ]</span>
+                    <p>» Site first created!! Welcome everyone</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="bottom-marquee">
+    <marquee behavior="scroll" scrollamount="3">
+        ✦ Thanks for visiting The Hub ✦ &nbsp;&nbsp; Don't forget to sign the guestbook! &nbsp;&nbsp; ✦ Best viewed in 1024x768 ✦ &nbsp;&nbsp; IE 6.0 compatible &nbsp;&nbsp; ✦
+    </marquee>
+</div>
+
+<div class="site-footer">
+    © 2005–2025 The Hub &nbsp;|&nbsp; <a href="credits.html">Credits</a> &nbsp;|&nbsp; <a href="#">Email Webmaster</a>
+    <br>Best viewed at 1024x768 resolution &nbsp;·&nbsp; Powered by HTML & passion
+</div>
+
+<script>
+    // Animate visitor counter
+    let count = 4271;
+    const el = document.getElementById('visit-counter');
+    function pad(n) { return String(n).padStart(6, '0'); }
+    setInterval(() => {
+        count += Math.floor(Math.random() * 2);
+        el.textContent = pad(count);
+    }, 8000);
+</script>
 
 </body>
 </html>
